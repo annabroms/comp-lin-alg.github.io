@@ -73,7 +73,7 @@ Supplementary video</summary><div class="video_wrapper" style="">
     </div><div class="proof-content">
 <p>An <span class="math notranslate nohighlight">\(m\times n\)</span> upper triangular matrix <span class="math notranslate nohighlight">\(R\)</span> has coefficients satisfying
 <span class="math notranslate nohighlight">\(r_{ij}=0\)</span> when <span class="math notranslate nohighlight">\(i &gt; j\)</span>.</p>
-<p>It is called upper triangular because the nonzero rows form a triangle
+<p>It is called upper triangular because the nonzero entries form a triangle
 on and above the main diagonal of <span class="math notranslate nohighlight">\(R\)</span>.</p>
 </div></div><p>Now we can describe the QR factorisation.</p>
 <div class="proof proof-type-definition" id="id2">
@@ -91,10 +91,10 @@ that <span class="math notranslate nohighlight">\(A=QR\)</span>.</p>
 polynomial fitting. It is also at the core of one of the most widely
 used algorithms for finding eigenvalues of matrices. We shall discuss
 all of this later during this course.</p>
-<p>When <span class="math notranslate nohighlight">\(m &gt; n\)</span>, <span class="math notranslate nohighlight">\(R\)</span> must have all zero rows after the <span class="math notranslate nohighlight">\(n\)</span> th row. Hence,
+<p>When <span class="math notranslate nohighlight">\(m &gt; n\)</span>, <span class="math notranslate nohighlight">\(R\)</span> must have all zero rows after the <span class="math notranslate nohighlight">\(n\)</span>-th row. Hence,
 it makes sense to only work with the top <span class="math notranslate nohighlight">\(n\times n\)</span> block of <span class="math notranslate nohighlight">\(R\)</span>
 consisting of the first <span class="math notranslate nohighlight">\(n\)</span> rows, which we call <span class="math notranslate nohighlight">\(\hat{R}\)</span>. Similarly,
-in the matrix-matrix product <span class="math notranslate nohighlight">\(QR\)</span>, all columns of <span class="math notranslate nohighlight">\(Q\)</span> beyond the <span class="math notranslate nohighlight">\(n\)</span> th
+in the matrix-matrix product <span class="math notranslate nohighlight">\(QR\)</span>, all columns of <span class="math notranslate nohighlight">\(Q\)</span> beyond the <span class="math notranslate nohighlight">\(n\)</span>-th
 column get multiplied by those zero rows in <span class="math notranslate nohighlight">\(R\)</span>, so it makes sense to
 only work with the first <span class="math notranslate nohighlight">\(n\)</span> columns of <span class="math notranslate nohighlight">\(Q\)</span>, which we call <span class="math notranslate nohighlight">\(\hat{Q}\)</span>.
 We then have the reduced QR factorisation, <span class="math notranslate nohighlight">\(\hat{Q}\hat{R}\)</span>.</p>
@@ -130,20 +130,20 @@ Supplementary video</summary><div class="video_wrapper" style="">
 <iframe allowfullscreen="true" src="https://player.vimeo.com/video/450192200" style="border: 0; height: 345px; width: 560px">
 </iframe></div></details><p>The classical Gram-Schmidt algorithm for QR factorisation is motivated
 by the column space interpretation of the matrix-matrix multiplication
-<span class="math notranslate nohighlight">\(A = QR\)</span>, namely that the jth column <span class="math notranslate nohighlight">\(a_j\)</span> of <span class="math notranslate nohighlight">\(A\)</span> is a linear
+<span class="math notranslate nohighlight">\(A = QR\)</span>, namely that the <span class="math notranslate nohighlight">\(j\)</span>-th column <span class="math notranslate nohighlight">\(a_j\)</span> of <span class="math notranslate nohighlight">\(A\)</span> is a linear
 combination of the orthonormal columns of <span class="math notranslate nohighlight">\(Q\)</span>, with the coefficients
-given by the jth column <span class="math notranslate nohighlight">\(r_j\)</span> of <span class="math notranslate nohighlight">\(R\)</span>.</p>
+given by the <span class="math notranslate nohighlight">\(j\)</span>-th column <span class="math notranslate nohighlight">\(r_j\)</span> of <span class="math notranslate nohighlight">\(R\)</span>.</p>
 <p>The first column of <span class="math notranslate nohighlight">\(R\)</span> only has a non-zero entry in the first row, so
-the first column of <span class="math notranslate nohighlight">\(Q\)</span> must be proportional to <span class="math notranslate nohighlight">\(A\)</span>, but normalised
-(i.e. rescaled to have length 1). The scaling factor is this first row
-of the first column of <span class="math notranslate nohighlight">\(R\)</span>. The second column of <span class="math notranslate nohighlight">\(R\)</span> has only non-zero
+the first column of <span class="math notranslate nohighlight">\(Q\)</span> must be proportional to the first column of <span class="math notranslate nohighlight">\(A\)</span>,
+but normalised (i.e. rescaled to have length 1). The scaling factor is
+the first entry of the first column of <span class="math notranslate nohighlight">\(R\)</span>. The second column of <span class="math notranslate nohighlight">\(R\)</span> has only non-zero
 entries in the first two rows, so the second column of <span class="math notranslate nohighlight">\(A\)</span> must be
 writeable as a linear combination of the first two columns of
-<span class="math notranslate nohighlight">\(Q\)</span>. Hence, the second column of <span class="math notranslate nohighlight">\(Q\)</span> must by the second column of <span class="math notranslate nohighlight">\(A\)</span>
+<span class="math notranslate nohighlight">\(Q\)</span>. Hence, the second column of <span class="math notranslate nohighlight">\(Q\)</span> must be the second column of <span class="math notranslate nohighlight">\(A\)</span>
 with the first column of <span class="math notranslate nohighlight">\(Q\)</span> projected out, and then normalised. The
-first row of the second column of <span class="math notranslate nohighlight">\(R\)</span> is then the coefficient for this
-projection, and the second row is the normalisation scaling
-factor. The third row of <span class="math notranslate nohighlight">\(Q\)</span> is then the third row of <span class="math notranslate nohighlight">\(A\)</span> with the
+first entry of the second column of <span class="math notranslate nohighlight">\(R\)</span> is then the coefficient for this
+projection, and the second entry is the normalisation scaling
+factor. The third column of <span class="math notranslate nohighlight">\(Q\)</span> is then the third column of <span class="math notranslate nohighlight">\(A\)</span> with the
 first two columns of <span class="math notranslate nohighlight">\(Q\)</span> projected out, and so on.</p>
 <p>Hence, finding a QR factorisation is equivalent to finding an
 orthonormal spanning set for the columns of <span class="math notranslate nohighlight">\(A\)</span>, where the span of the
@@ -242,7 +242,7 @@ Supplementary video</summary><div class="video_wrapper" style="">
 </iframe></div></details><p>There is a big problem with the classical Gram-Schmidt algorithm. It
 is unstable, which means that when it is implemented in inexact
 arithmetic on a computer, round-off error unacceptably pollutes the
-entries of <span class="math notranslate nohighlight">\(Q\)</span> and <span class="math notranslate nohighlight">\(R\)</span>, and the algorithm is not useable in
+entries of <span class="math notranslate nohighlight">\(Q\)</span> and <span class="math notranslate nohighlight">\(R\)</span>, and the algorithm is not usable in
 practice. What happens is that the columns of <span class="math notranslate nohighlight">\(Q\)</span> are not quite
 orthogonal, and this loss of orthogonality spoils everything. We will
 discuss stability later in the course, but right now we will just
@@ -262,22 +262,23 @@ out one column of <span class="math notranslate nohighlight">\(Q\)</span>, i.e.<
 <p>Here we notice that we must apply <span class="math notranslate nohighlight">\(P_{\perp q_1}\)</span> to all but one
 columns of <span class="math notranslate nohighlight">\(A\)</span>, and <span class="math notranslate nohighlight">\(P_{\perp q_2}\)</span> to all but two columns of <span class="math notranslate nohighlight">\(A\)</span>,
 <span class="math notranslate nohighlight">\(P_{\perp q_3}\)</span> to all but three columns of <span class="math notranslate nohighlight">\(A\)</span>, and so on.</p>
-<p>By doing this, we gradually transform <span class="math notranslate nohighlight">\(A\)</span> to a unitary matrix, as follows.</p>
+<p>By doing this, we gradually transform <span class="math notranslate nohighlight">\(A\)</span> to the matrix <span class="math notranslate nohighlight">\(\hat{Q}\)</span> with
+orthonormal columns (which is unitary if <span class="math notranslate nohighlight">\(m=n\)</span>), as follows.</p>
 <blockquote>
 <div><div class="math notranslate nohighlight">
-\[ \begin{align}\begin{aligned}\begin{split}A =
+\[\begin{split}A = \begin{pmatrix}
+a_1 &amp; a_2 &amp; a_3 &amp; \ldots &amp; a_n
+\end{pmatrix}
+&amp;\to \begin{pmatrix}
+q_1 &amp; v_2^1 &amp; v_3^1 &amp; \ldots &amp; v_n^1
+\end{pmatrix}
+\to \begin{pmatrix}
+q_1 &amp; q_2 &amp; v_3^2 &amp; \ldots &amp; v_n^2
+\end{pmatrix} \\
+&amp;\to \ldots \to
 \begin{pmatrix}
-a_1 &amp; a_2 &amp; a_3 &amp; \ldots &amp; a_n \\
-\end{pmatrix}\end{split}\\\begin{split}\begin{pmatrix}
-q_1 &amp; v_2^1 &amp; v_3^1 &amp; \ldots &amp; v_n^1 \\
-\end{pmatrix}\end{split}\\\begin{split}\to
-\begin{pmatrix}
-q_1 &amp; q_2 &amp; v_3^2 &amp; \ldots &amp; v_n^2 \\
-\end{pmatrix}\end{split}\\\begin{split}\ldots
-\to
-\begin{pmatrix}
-q_1 &amp; q_2 &amp; q_3 &amp; \ldots &amp; q_n \\
-\end{pmatrix}.\end{split}\end{aligned}\end{align} \]</div>
+q_1 &amp; q_2 &amp; q_3 &amp; \ldots &amp; q_n
+\end{pmatrix} = \hat{Q}.\end{split}\]</div>
 </div></blockquote>
 <p>Then it is just a matter of keeping a record of the coefficients
 of the projections and normalisation scaling factors and storing
@@ -395,24 +396,25 @@ v_1^1 &amp; v_2^1 &amp; \ldots &amp; v_n^1
 =
 \underbrace{
 \begin{pmatrix}
-q_1 &amp; q_2 &amp; v_3^2 \ldots &amp; v_n^2
+q_1 &amp; q_2 &amp; v_3^2 &amp; \ldots &amp; v_n^2
 \end{pmatrix}}_{A_2}.\end{split}\]</div>
 </div></blockquote>
-<p>It should become clear that each transformation from <span class="math notranslate nohighlight">\(A_i\)</span> to <span class="math notranslate nohighlight">\(A_{i+1}\)</span>
-takes place by right multiplication by an upper triangular matrix <span class="math notranslate nohighlight">\(R_{i+1}\)</span>,
-which is an identity matrix plus entries in row i. By combining these
+<p>It should become clear that each transformation from <span class="math notranslate nohighlight">\(A_{j-1}\)</span> to <span class="math notranslate nohighlight">\(A_j\)</span>
+(with <span class="math notranslate nohighlight">\(A_0=A\)</span>) takes place by right multiplication by an upper
+triangular matrix <span class="math notranslate nohighlight">\(R_j\)</span>, which is an identity matrix plus entries in
+row <span class="math notranslate nohighlight">\(j\)</span>. By combining these
 transformations together, we obtain</p>
 <blockquote>
 <div><div class="math notranslate nohighlight">
 \[A\underbrace{R_1R_2\ldots R_n}_{\hat{R}^{-1}} = \hat{Q}.\]</div>
 </div></blockquote>
-<p>Since upper triangular matrices form a group, the product of the <span class="math notranslate nohighlight">\(R_i\)</span>
+<p>Since invertible upper triangular matrices form a group, the product of the <span class="math notranslate nohighlight">\(R_i\)</span>
 matrices is upper triangular. Further, all the <span class="math notranslate nohighlight">\(R_i\)</span> matrices have
 non-zero determinant, so the product is invertible, and we can write
 this as <span class="math notranslate nohighlight">\(\hat{R}^{-1}\)</span>. Right multiplication by <span class="math notranslate nohighlight">\(\hat{R}\)</span> produces the
 usual reduced QR factorisation. We say that modified Gram-Schmidt
 implements triangular orthogonalisation: the transformation of <span class="math notranslate nohighlight">\(A\)</span> to
-an orthogonal matrix by right multiplication of upper triangular
+a matrix with orthonormal columns by right multiplication of upper triangular
 matrices.</p>
 <p>This is a powerful way to view the modified Gram-Schmidt process from
 the point of view of understanding and analysis, but of course we do not
@@ -427,7 +429,7 @@ above).</p>
 <p>In a break from the format so far, the
 <code class="xref py py-func docutils literal notranslate"><span class="pre">cla_utils.exercises2.GS_modified_R()</span></code> function has been
 implemented. It implements the modified Gram-Schmidt algorithm in
-the form describe above using upper triangular matrices. This is
+the form described above using upper triangular matrices. This is
 not a good way to implement the algorithm, because of the inversion
 of <span class="math notranslate nohighlight">\(R\)</span> at the end, and the repeated multiplication by zeros in
 multiplying entries of the <span class="math notranslate nohighlight">\(R_k\)</span> matrices, which is a
@@ -442,8 +444,8 @@ matrices at each step of the process. Complete this code. The test
 script <code class="docutils literal notranslate"><span class="pre">test_exercises2.py</span></code> in the <code class="docutils literal notranslate"><span class="pre">test</span></code> directory will also
 test this function.</p>
 </div></div></section>
-<section id="householder-triangulation">
-<h2><span class="section-number">3.6. </span>Householder triangulation<a class="headerlink" href="#householder-triangulation" title="Link to this heading">¶</a></h2>
+<section id="householder-triangularisation">
+<h2><span class="section-number">3.6. </span>Householder triangularisation<a class="headerlink" href="#householder-triangularisation" title="Link to this heading">¶</a></h2>
 <details>
 <summary>
 Supplementary video</summary><div class="video_wrapper" style="">
@@ -467,7 +469,7 @@ Supplementary video</summary><div class="video_wrapper" style="">
 transforming them so that each column has zeros below the
 diagonal. These unitary transformations need to be designed so that they
 don’t spoil the structure created in previous columns. The easiest
-way to ensure this is construct a unitary matrix <span class="math notranslate nohighlight">\(Q_k\)</span> with an identity
+way to ensure this is to construct a unitary matrix <span class="math notranslate nohighlight">\(Q_k\)</span> with an identity
 matrix as the <span class="math notranslate nohighlight">\((k-1)\times (k-1)\)</span> submatrix,</p>
 <blockquote>
 <div><div class="math notranslate nohighlight">
@@ -481,7 +483,7 @@ I_{k-1} &amp; 0 \\
 rows, leaving the previous work to remove zeros below the diagonal
 undisturbed. For <span class="math notranslate nohighlight">\(Q_k\)</span> to be unitary and to transform all below
 diagonal entries in column <span class="math notranslate nohighlight">\(k\)</span> to zero, we need the
-<span class="math notranslate nohighlight">\((n-k+1)\times(n-k+1)\)</span> submatrix <span class="math notranslate nohighlight">\(F\)</span> to also be unitary, since</p>
+<span class="math notranslate nohighlight">\((m-k+1)\times(m-k+1)\)</span> submatrix <span class="math notranslate nohighlight">\(F\)</span> to also be unitary, since</p>
 <blockquote>
 <div><div class="math notranslate nohighlight">
 \[\begin{split}Q_k^* =
@@ -495,7 +497,7 @@ I_{k-1} &amp; 0 \\
 0 &amp; F^{-1} \\
 \end{pmatrix}.\end{split}\]</div>
 </div></blockquote>
-<p>We write the <span class="math notranslate nohighlight">\(k\)</span> th column <span class="math notranslate nohighlight">\(v_k^k\)</span> of <span class="math notranslate nohighlight">\(A_k\)</span> as</p>
+<p>We write the <span class="math notranslate nohighlight">\(k\)</span>-th column <span class="math notranslate nohighlight">\(v_k^k\)</span> of <span class="math notranslate nohighlight">\(A_k\)</span> as</p>
 <blockquote>
 <div><div class="math notranslate nohighlight">
 \[\begin{split}v_k^k =
@@ -511,7 +513,7 @@ gets transformed according to</p>
 \[\begin{split}Q_kv_k^k = \begin{pmatrix}
 \hat{v}_k^k \\
 Fx
-\end{pmatrix}.\end{split}\]</div>
+\end{pmatrix},\end{split}\]</div>
 </div></blockquote>
 <p>and our goal is that <span class="math notranslate nohighlight">\(Fx\)</span> is zero, except for the first entry (which
 becomes the diagonal entry of <span class="math notranslate nohighlight">\(Q_kv_k^k\)</span>). Since <span class="math notranslate nohighlight">\(F\)</span> is unitary, we must
@@ -544,9 +546,12 @@ need to go twice as far,</p>
 <p>We can check that this does what we want,</p>
 <blockquote>
 <div><div class="math notranslate nohighlight">
-\[ \begin{align}\begin{aligned}Fx = \left(I - 2\frac{vv^*}{v^*v}\right)x,\\   = x - 2\frac{(\pm\|x\|e_1 - x)}{\|\pm\|x\|e_1 - x\|^2}
-   (\pm\|x\|e_1 - x)^*x,\\   = x - 2\frac{(\pm\|x\|e_1 - x)}{\|\pm\|x\|e_1 - x\|^2}
-   \|x\|(\pm x_1 - \|x\|),\\   = x + (\pm\|x\|e_1 - x) = \pm\|x\|e_1,\end{aligned}\end{align} \]</div>
+\[\begin{split}Fx &amp;= \left(I - 2\frac{vv^*}{v^*v}\right)x \\
+&amp;= x - 2\frac{(\pm\|x\|e_1 - x)}{\|\pm\|x\|e_1 - x\|^2}
+(\pm\|x\|e_1 - x)^*x \\
+&amp;= x - 2\frac{(\pm\|x\|e_1 - x)}{\|\pm\|x\|e_1 - x\|^2}
+\|x\|(\pm x_1 - \|x\|) \\
+&amp;= x + (\pm\|x\|e_1 - x) = \pm\|x\|e_1,\end{split}\]</div>
 </div></blockquote>
 <p>as required, having checked that (assuming <span class="math notranslate nohighlight">\(x\)</span> is real)</p>
 <blockquote>
@@ -558,19 +563,22 @@ need to go twice as far,</p>
 is Hermitian,</p>
 <blockquote>
 <div><div class="math notranslate nohighlight">
-\[ \begin{align}\begin{aligned}\left(I - 2\frac{vv^*}{v^*v}\right)^*
-= I - 2\frac{(vv^*)^*}{v^*v},\\= I - 2\frac{(v^*)^*v^*}{v^*v},\\= I - 2\frac{vv^*}{v^*v} = F.\end{aligned}\end{align} \]</div>
+\[\left(I - 2\frac{vv^*}{v^*v}\right)^*
+= I - 2\frac{(vv^*)^*}{v^*v}
+= I - 2\frac{(v^*)^*v^*}{v^*v}
+= I - 2\frac{vv^*}{v^*v} = F.\]</div>
 </div></blockquote>
 <p>Now we use this to show that <span class="math notranslate nohighlight">\(F\)</span> is unitary,</p>
 <blockquote>
 <div><div class="math notranslate nohighlight">
-\[ \begin{align}\begin{aligned}F^*F = \left(I - 2\frac{vv^*}{v^*v}\right)
-\left(I - 2\frac{vv^*}{v^*v}\right)\\= I - 4\frac{vv^*}{v^*v} +
-4 \frac{vv^*}{v^*v}\frac{vv^*}{v^*v} = I,\end{aligned}\end{align} \]</div>
+\[F^*F = \left(I - 2\frac{vv^*}{v^*v}\right)
+\left(I - 2\frac{vv^*}{v^*v}\right)
+= I - 4\frac{vv^*}{v^*v} +
+4 \frac{vv^*}{v^*v}\frac{vv^*}{v^*v} = I,\]</div>
 </div></blockquote>
 <p>so <span class="math notranslate nohighlight">\(F^*=F^{-1}\)</span>. In summary, we have constructed a unitary
 matrix <span class="math notranslate nohighlight">\(Q_k\)</span> that transforms the entries below the diagonal
-of the kth column of <span class="math notranslate nohighlight">\(A_k\)</span> to zero, and leaves the previous
+of the <span class="math notranslate nohighlight">\(k\)</span>-th column of <span class="math notranslate nohighlight">\(A_k\)</span> to zero, and leaves the previous
 <span class="math notranslate nohighlight">\(k-1\)</span> columns alone.</p>
 <details>
 <summary>
@@ -579,13 +587,17 @@ Supplementary video</summary><div class="video_wrapper" style="">
 </iframe></div></details><p>Earlier, we mentioned that there is a choice of sign in <span class="math notranslate nohighlight">\(v\)</span>.  This
 choice gives us the opportunity to improve the numerical stability of
 the algorithm. In the case of real matrices, to avoid unnecessary
-numerical round off, we choose the sign that makes <span class="math notranslate nohighlight">\(v\)</span> furthest from
-<span class="math notranslate nohighlight">\(x\)</span>, i.e.</p>
+numerical round off, we choose the sign so that the target
+<span class="math notranslate nohighlight">\(Fx=-\mbox{sign}(x_1)\|x\|e_1\)</span> is the one of the two candidates
+<span class="math notranslate nohighlight">\(\pm\|x\|e_1\)</span> that is furthest from <span class="math notranslate nohighlight">\(x\)</span>. Then <span class="math notranslate nohighlight">\(v\)</span> is not computed as
+the difference of two nearly equal vectors, which would cause
+cancellation. Since <span class="math notranslate nohighlight">\(F\)</span> only depends on the direction of <span class="math notranslate nohighlight">\(v\)</span>, we can
+change its overall sign and write</p>
 <blockquote>
 <div><div class="math notranslate nohighlight">
 \[v = \mbox{sign}(x_1)\|x\|e_1 + x.\]</div>
 </div></blockquote>
-<p>(Exercise, show that this choice of sign achieves this.) It is critical
+<p>(Exercise: show that this choice of sign achieves this.) It is critical
 that we use a definition of <span class="math notranslate nohighlight">\(\mbox{sign}\)</span> that always returns a number
 that has magnitude 1, so we conventionally choose <span class="math notranslate nohighlight">\(\mbox{sign}(0)=1\)</span>.</p>
 <div class="admonition hint">
@@ -597,7 +609,7 @@ implementation.</p>
 <p>For complex valued matrices, the Householder reflection uses <span class="math notranslate nohighlight">\(x_1/|x_1|\)</span>
 (except for <span class="math notranslate nohighlight">\(x_1=0\)</span> where we use 1 as above).</p>
 <p>We are now in a position to describe the algorithm in
-pseudo-code. Here it is described an “in-place” algorithm, where the
+pseudo-code. Here it is described as an “in-place” algorithm, where the
 successive transformations to the columns of <span class="math notranslate nohighlight">\(A\)</span> are implemented as
 replacements of the values in <span class="math notranslate nohighlight">\(A\)</span>. This means that we can allocate
 memory on the computer for <span class="math notranslate nohighlight">\(A\)</span> which is eventually replaced with the
@@ -629,8 +641,13 @@ above, using only one loop over <span class="math notranslate nohighlight">\(k\)
 directory will test this function.</p>
 </div></div><div class="admonition hint">
 <p class="admonition-title">Hint</p>
-<p>The “slice” notation using colons “:” is more an more important
+<p>The “slice” notation using colons “:” is more and more important
 when we are doing operations on submatrices. For example,</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">A</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="mi">3</span><span class="p">,</span> <span class="mi">3</span><span class="p">:</span><span class="mi">6</span><span class="p">]</span> <span class="o">-=</span> <span class="n">B</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="mi">3</span><span class="p">,</span> <span class="mi">3</span><span class="p">:</span><span class="mi">6</span><span class="p">]</span>
+</pre></div>
+</div>
+<p>only updates the specified <span class="math notranslate nohighlight">\(3\times 3\)</span> submatrix of <span class="math notranslate nohighlight">\(A\)</span>, but does it
+using fast precompiled code.</p>
 </div>
 <div class="admonition hint">
 <p class="admonition-title">Hint</p>
@@ -639,15 +656,18 @@ when implementing the submatrices using Numpy slice notation.</p>
 </div>
 <div class="admonition hint">
 <p class="admonition-title">Hint</p>
-<p>The Python functions “inner”, “outer”, and “dot” are very useful
-for succinctly expressing many linear algebra
-operations. “inner(a,b)” multiplies each component of a
-multidimensional array <span class="math notranslate nohighlight">\(a\)</span> with the corresponding component of another
-array <span class="math notranslate nohighlight">\(b\)</span> (with the same “shape”) and sums over all indices.
-“dot(a, b)” only sums over the last index of <span class="math notranslate nohighlight">\(a\)</span> and the first
-index of <span class="math notranslate nohighlight">\(b\)</span>. For some algorithms it may be necessary to swap
-the order of <span class="math notranslate nohighlight">\(a\)</span> and <span class="math notranslate nohighlight">\(b\)</span> and make use of transposes to sum
-over the correct index.</p>
+<p>The Numpy functions <a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.inner.html#numpy.inner" title="(in NumPy v2.5)"><code class="xref py py-func docutils literal notranslate"><span class="pre">numpy.inner()</span></code></a>, <a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.outer.html#numpy.outer" title="(in NumPy v2.5)"><code class="xref py py-func docutils literal notranslate"><span class="pre">numpy.outer()</span></code></a> and
+<a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.dot.html#numpy.dot" title="(in NumPy v2.5)"><code class="xref py py-func docutils literal notranslate"><span class="pre">numpy.dot()</span></code></a> (or the <code class="docutils literal notranslate"><span class="pre">&#64;</span></code> operator) are very useful for
+succinctly expressing many linear algebra operations.
+<code class="docutils literal notranslate"><span class="pre">numpy.inner(a,</span> <span class="pre">b)</span></code> multiplies components of <span class="math notranslate nohighlight">\(a\)</span> and <span class="math notranslate nohighlight">\(b\)</span> and sums
+over the <em>last</em> index of each (for vectors, this is the usual sum of
+products). <code class="docutils literal notranslate"><span class="pre">numpy.dot(a,</span> <span class="pre">b)</span></code> (and <code class="docutils literal notranslate"><span class="pre">a</span> <span class="pre">&#64;</span> <span class="pre">b</span></code>) sums over the last
+index of <span class="math notranslate nohighlight">\(a\)</span> and the first index of <span class="math notranslate nohighlight">\(b\)</span>, when <span class="math notranslate nohighlight">\(b\)</span> is a vector or a
+matrix. For some algorithms it may be necessary to swap the order of
+<span class="math notranslate nohighlight">\(a\)</span> and <span class="math notranslate nohighlight">\(b\)</span> and make use of transposes to sum over the correct index.</p>
+<p>Note that none of these functions takes the complex conjugate. For
+complex vectors, compute <span class="math notranslate nohighlight">\(x^*y\)</span> with <code class="docutils literal notranslate"><span class="pre">numpy.vdot(x,</span> <span class="pre">y)</span></code> or
+<code class="docutils literal notranslate"><span class="pre">x.conj()</span> <span class="pre">&#64;</span> <span class="pre">y</span></code>.</p>
 </div>
 <details>
 <summary>
@@ -674,14 +694,17 @@ apply the same operations to <span class="math notranslate nohighlight">\(b\)</s
 Supplementary video</summary><div class="video_wrapper" style="">
 <iframe allowfullscreen="true" src="https://player.vimeo.com/video/450202242" style="border: 0; height: 345px; width: 560px">
 </iframe></div></details><p>In this section we will frequently encounter systems of the form</p>
-<div class="math notranslate nohighlight">
-\[\hat{R}x = y.\]</div>
-<p>This is an upper triangular system that can be solved efficiently
-using back-substitution.</p>
+<blockquote>
+<div><div class="math notranslate nohighlight">
+\[Rx = y,\]</div>
+</div></blockquote>
+<p>where <span class="math notranslate nohighlight">\(R\)</span> is an <span class="math notranslate nohighlight">\(m\times m\)</span> upper triangular matrix (for example
+<span class="math notranslate nohighlight">\(R=\hat{R}\)</span>, with <span class="math notranslate nohighlight">\(m=n\)</span>). This is an upper triangular system that can
+be solved efficiently using back-substitution.</p>
 <p>Written in components, this equation is</p>
 <blockquote>
 <div><div class="math notranslate nohighlight">
-\[ \begin{align}\begin{aligned}R_{11}x_1 + R_{12}x_2 + \ldots + R_{1(m-1)}x_{m-1} + R_{1m}x_m = y_1,\\0x_1 + R_{22}x_2 + \ldots + R_{2(m-1)}x_{m-1} + R_{2m}x_m = y_2,\\\vdots\\0x_1 + 0x_2 + \ldots + R_{(m-1)(m-1)}x_{m-1} + R_{(m-1)m}x_m = y_{m-1},\\ 0x_1 + 0x_2 + \ldots + 0x_{m-1} + R_{mm}x_m = y_{m}.\end{aligned}\end{align} \]</div>
+\[ \begin{align}\begin{aligned}R_{11}x_1 + R_{12}x_2 + \ldots + R_{1(m-1)}x_{m-1} + R_{1m}x_m = y_1,\\0x_1 + R_{22}x_2 + \ldots + R_{2(m-1)}x_{m-1} + R_{2m}x_m = y_2,\\\vdots\\0x_1 + 0x_2 + \ldots + R_{(m-1)(m-1)}x_{m-1} + R_{(m-1)m}x_m = y_{m-1},\\0x_1 + 0x_2 + \ldots + 0x_{m-1} + R_{mm}x_m = y_{m}.\end{aligned}\end{align} \]</div>
 </div></blockquote>
 <p>The last equation yields <span class="math notranslate nohighlight">\(x_m\)</span> directly by dividing by <span class="math notranslate nohighlight">\(R_{mm}\)</span>, then
 we can use this value to directly compute <span class="math notranslate nohighlight">\(x_{m-1}\)</span>. This is repeated
@@ -695,6 +718,7 @@ pseudo-code.</p>
 <li><p><span class="math notranslate nohighlight">\(x_i \gets (y_i - \sum_{k=i+1}^mR_{ik}x_k)/R_{ii}\)</span></p></li>
 </ul>
 </li>
+<li><p>END FOR</p></li>
 </ul>
 <div class="proof proof-type-exercise" id="id9">
 
@@ -706,10 +730,10 @@ pseudo-code.</p>
 been left unimplemented.  It should use backward substitution to
 solve upper triangular systems. The interfaces are set so that
 multiple right hand sides can be provided and solved at the same
-time. The functions should only use one loop over the rows of <span class="math notranslate nohighlight">\(U\)</span>,
+time. The function should only use one loop over the rows of <span class="math notranslate nohighlight">\(U\)</span>,
 to efficiently solve the multiple problems. The test script
-<code class="docutils literal notranslate"><span class="pre">test_exercises3.py</span></code> in the <code class="docutils literal notranslate"><span class="pre">test</span></code> directory will test these
-functions.</p>
+<code class="docutils literal notranslate"><span class="pre">test_exercises3.py</span></code> in the <code class="docutils literal notranslate"><span class="pre">test</span></code> directory will test this
+function.</p>
 </div></div><div class="proof proof-type-exercise" id="id10">
 
     <div class="proof-title">
@@ -724,7 +748,7 @@ equivalent to computing an extended array</p>
 a_1 &amp; a_2 &amp; \ldots &amp; a_n &amp; b
 \end{pmatrix}\]</div>
 </div></blockquote>
-<p>and performing Householder on the first <span class="math notranslate nohighlight">\(n\)</span> rows. Transform the
+<p>and performing Householder on the first <span class="math notranslate nohighlight">\(n\)</span> columns. Transform the
 equation <span class="math notranslate nohighlight">\(Ax=b\)</span> into <span class="math notranslate nohighlight">\(Rx=\hat{b}\)</span> where <span class="math notranslate nohighlight">\(QR=A\)</span>, and find the form
 of <span class="math notranslate nohighlight">\(\hat{b}\)</span>, explaining how to get <span class="math notranslate nohighlight">\(\hat{b}\)</span> from Householder
 applied to <span class="math notranslate nohighlight">\(\hat{A}\)</span> above. Solving systems with upper triangular
@@ -745,7 +769,8 @@ construct an extended array <span class="math notranslate nohighlight">\(\hat{A}
 <code class="xref py py-func docutils literal notranslate"><span class="pre">cla_utils.exercises3.householder()</span></code>. You will also need
 <code class="xref py py-func docutils literal notranslate"><span class="pre">cla_utils.exercises3.solve_U()</span></code>.</p>
 </div></div><p>If we really need <span class="math notranslate nohighlight">\(Q\)</span>, we can get it by matrix-vector products with
-each element of the canonical basis <span class="math notranslate nohighlight">\((e_1,e_2,\ldots,e_n)\)</span>.  This
+each element of the canonical basis <span class="math notranslate nohighlight">\((e_1,e_2,\ldots,e_m)\)</span> (the first
+<span class="math notranslate nohighlight">\(n\)</span> of these give the columns of <span class="math notranslate nohighlight">\(\hat{Q}\)</span>).  This
 means that first we need to compute a matrix-vector product <span class="math notranslate nohighlight">\(Qx\)</span> with
 a vector <span class="math notranslate nohighlight">\(x\)</span>. One way to do this is to apply the Householder
 reflections in reverse, since</p>
@@ -763,14 +788,14 @@ Hermitian. This can be expressed in the following pseudo-code.</p>
 </li>
 <li><p>END FOR</p></li>
 </ul>
-<p>Note that this requires to record all of the history of the <span class="math notranslate nohighlight">\(v\)</span> vectors,
+<p>Note that this requires us to record all of the history of the <span class="math notranslate nohighlight">\(v\)</span> vectors,
 whilst the <span class="math notranslate nohighlight">\(Q^*\)</span> application algorithm above can be interlaced with the
 steps of the Householder algorithm, using the <span class="math notranslate nohighlight">\(v\)</span> values as they are
 needed and throwing them away. Then we can compute <span class="math notranslate nohighlight">\(Q\)</span> via</p>
 <blockquote>
 <div><div class="math notranslate nohighlight">
 \[Q = \begin{pmatrix}
-Qe_1 &amp; Qe_2 &amp; \ldots &amp; Qe_n
+Qe_1 &amp; Qe_2 &amp; \ldots &amp; Qe_m
 \end{pmatrix},\]</div>
 </div></blockquote>
 <p>with each column using the <span class="math notranslate nohighlight">\(Q\)</span> application algorithm described above.</p>
@@ -800,7 +825,7 @@ this function.</p>
 <summary>
 Supplementary video</summary><div class="video_wrapper" style="">
 <iframe allowfullscreen="true" src="https://player.vimeo.com/video/450202726" style="border: 0; height: 345px; width: 560px">
-</iframe></div></details><p>Least square problems are relevant in data fitting problems,
+</iframe></div></details><p>Least squares problems are relevant in data fitting problems,
 optimisation and control, and are also a crucial ingredient of modern
 massively parallel linear system solver algorithms such as GMRES,
 which we shall encounter later in the course. They are a way of
@@ -811,21 +836,22 @@ is overdetermined for <span class="math notranslate nohighlight">\(m&gt;n\)</spa
 the 2-norm of the residual <span class="math notranslate nohighlight">\(r=b-Ax\)</span>, i.e. <span class="math notranslate nohighlight">\(x\)</span> is the minimiser of</p>
 <blockquote>
 <div><div class="math notranslate nohighlight">
-\[min_x \|Ax - b\|^2.\]</div>
+\[\min_x \|Ax - b\|^2.\]</div>
 </div></blockquote>
 <p>This residual will not be zero in general, when <span class="math notranslate nohighlight">\(b\)</span> is not in the
 range of <span class="math notranslate nohighlight">\(A\)</span>. The nearest point in the range of <span class="math notranslate nohighlight">\(A\)</span> to <span class="math notranslate nohighlight">\(b\)</span> is <span class="math notranslate nohighlight">\(Pb\)</span>,
 where <span class="math notranslate nohighlight">\(P\)</span> is the orthogonal projector onto the range of <span class="math notranslate nohighlight">\(A\)</span>. From
 <a class="reference internal" href="L1_preliminaries.html#orthogonalprojector"><span class="std std-ref">the orthogonal-projector theorem</span></a>, we know that
 <span class="math notranslate nohighlight">\(P=\hat{Q}\hat{Q}^*\)</span>, where <span class="math notranslate nohighlight">\(\hat{Q}\)</span> from the reduced <span class="math notranslate nohighlight">\(QR\)</span>
-factorisation has the same column space as <span class="math notranslate nohighlight">\(A\)</span> (but with orthogonal
-columns).</p>
+factorisation has the same column space as <span class="math notranslate nohighlight">\(A\)</span> (but with orthonormal
+columns), assuming that <span class="math notranslate nohighlight">\(A\)</span> has full rank <span class="math notranslate nohighlight">\(n\)</span> (so that <span class="math notranslate nohighlight">\(\hat{R}\)</span> is
+invertible).</p>
 <p>Then, we just have to solve</p>
 <blockquote>
 <div><div class="math notranslate nohighlight">
 \[Ax = Pb,\]</div>
 </div></blockquote>
-<p>which is now solveable since <span class="math notranslate nohighlight">\(Pb\)</span> is in the column space of <span class="math notranslate nohighlight">\(A\)</span> (and
+<p>which is now solvable since <span class="math notranslate nohighlight">\(Pb\)</span> is in the column space of <span class="math notranslate nohighlight">\(A\)</span> (and
 hence can be written as a linear combination of the columns of <span class="math notranslate nohighlight">\(A\)</span> i.e.
 as a matrix-vector product <span class="math notranslate nohighlight">\(Ax\)</span> for some unknown <span class="math notranslate nohighlight">\(x\)</span>).</p>
 <p>Now we have the reduced <span class="math notranslate nohighlight">\(QR\)</span> factorisation of <span class="math notranslate nohighlight">\(A\)</span>, and we can write</p>
@@ -859,7 +885,7 @@ script <code class="docutils literal notranslate"><span class="pre">test_exercis
 test this function.</p>
 </div></div><div class="admonition hint">
 <p class="admonition-title">Hint</p>
-<p>You will need to do extract the appropriate submatrix to obtain the
+<p>You will need to extract the appropriate submatrix to obtain the
 square (and invertible) reduced matrix <span class="math notranslate nohighlight">\(\hat{R}\)</span>.</p>
 </div>
 </section>

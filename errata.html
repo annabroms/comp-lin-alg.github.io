@@ -51,6 +51,192 @@
 <p>Here we’ll list all the updates to the exercises and coursework Classroom
 repositories for Autumn 2026. An up to date version is in the
 <a class="reference external" href="https://github.com/comp-lin-alg/comp-lin-alg-course">public repository</a>.</p>
+<section id="chapter-2-linear-algebra-preliminaries">
+<h2>Chapter 2: Linear algebra preliminaries<a class="headerlink" href="#chapter-2-linear-algebra-preliminaries" title="Link to this heading">¶</a></h2>
+<ul class="simple">
+<li><p>In <a class="reference internal" href="L1_preliminaries.html"><span class="doc">Linear algebra preliminaries</span></a>, the exercise on solving <span class="math notranslate nohighlight">\(Qx=b\)</span> referred
+to <code class="docutils literal notranslate"><span class="pre">solveQ</span></code>; the function is <code class="xref py py-func docutils literal notranslate"><span class="pre">cla_utils.exercises2.solve_Q()</span></code>.</p></li>
+<li><p>In <code class="docutils literal notranslate"><span class="pre">cla_utils/exercises1.py</span></code>, the docstrings of <code class="docutils literal notranslate"><span class="pre">rank1pert_inv</span></code>
+and <code class="docutils literal notranslate"><span class="pre">ABiC</span></code> now document the return value and the <code class="docutils literal notranslate"><span class="pre">xr</span></code>, <code class="docutils literal notranslate"><span class="pre">xi</span></code>
+arguments, respectively.</p></li>
+<li><p>In <code class="docutils literal notranslate"><span class="pre">cla_utils/exercises2.py</span></code>, the docstring of <code class="docutils literal notranslate"><span class="pre">orthog_proj</span></code> no
+longer mentions an input vector <code class="docutils literal notranslate"><span class="pre">v</span></code>, which is not an argument.</p></li>
+</ul>
+</section>
+<section id="chapter-3-qr-factorisation">
+<h2>Chapter 3: QR factorisation<a class="headerlink" href="#chapter-3-qr-factorisation" title="Link to this heading">¶</a></h2>
+<ul class="simple">
+<li><p>In <a class="reference internal" href="L2_QR_factorisation.html"><span class="doc">QR factorisation</span></a>, in the motivation of the classical
+Gram-Schmidt algorithm, the first column of <span class="math notranslate nohighlight">\(Q\)</span> is proportional to
+the first column of <span class="math notranslate nohighlight">\(A\)</span>, and the third column (not row) of <span class="math notranslate nohighlight">\(Q\)</span> is
+the third column of <span class="math notranslate nohighlight">\(A\)</span> with the first two columns of <span class="math notranslate nohighlight">\(Q\)</span> projected
+out.</p></li>
+<li><p>In <a class="reference internal" href="L2_QR_factorisation.html"><span class="doc">QR factorisation</span></a>, modified Gram-Schmidt transforms <span class="math notranslate nohighlight">\(A\)</span>
+to <span class="math notranslate nohighlight">\(\hat{Q}\)</span>, which has orthonormal columns (and is unitary only if
+<span class="math notranslate nohighlight">\(m=n\)</span>); an arrow was missing in the displayed sequence of matrices.</p></li>
+<li><p>In <a class="reference internal" href="L2_QR_factorisation.html"><span class="doc">QR factorisation</span></a>, in Householder triangularisation,
+the submatrix <span class="math notranslate nohighlight">\(F\)</span> is <span class="math notranslate nohighlight">\((m-k+1)\times(m-k+1)\)</span>, rather than
+<span class="math notranslate nohighlight">\((n-k+1)\times(n-k+1)\)</span>.</p></li>
+<li><p>In <a class="reference internal" href="L2_QR_factorisation.html"><span class="doc">QR factorisation</span></a>, the stable sign choice in the
+Householder algorithm makes the target <span class="math notranslate nohighlight">\(Fx=-\mbox{sign}(x_1)\|x\|e_1\)</span>
+furthest from <span class="math notranslate nohighlight">\(x\)</span> (so that computing <span class="math notranslate nohighlight">\(v\)</span> involves no cancellation),
+rather than making <span class="math notranslate nohighlight">\(v\)</span> furthest from <span class="math notranslate nohighlight">\(x\)</span>.</p></li>
+<li><p>In <a class="reference internal" href="L2_QR_factorisation.html"><span class="doc">QR factorisation</span></a>, the slice <span class="math notranslate nohighlight">\(A[0:3, 3:6]\)</span> is a
+<span class="math notranslate nohighlight">\(3\times 3\)</span> submatrix, rather than <span class="math notranslate nohighlight">\(4\times 4\)</span>.</p></li>
+<li><p>In <a class="reference internal" href="L2_QR_factorisation.html"><span class="doc">QR factorisation</span></a>, the hint on Numpy’s <code class="docutils literal notranslate"><span class="pre">inner</span></code> and
+<code class="docutils literal notranslate"><span class="pre">dot</span></code> has been corrected: <code class="docutils literal notranslate"><span class="pre">numpy.inner</span></code> sums over the last index
+of each array (not over all indices), and neither function takes the
+complex conjugate, so <span class="math notranslate nohighlight">\(x^*y\)</span> should be computed with <code class="docutils literal notranslate"><span class="pre">numpy.vdot</span></code>
+or <code class="docutils literal notranslate"><span class="pre">x.conj()</span> <span class="pre">&#64;</span> <span class="pre">y</span></code>.</p></li>
+<li><p>In <a class="reference internal" href="L2_QR_factorisation.html"><span class="doc">QR factorisation</span></a>, in the exercise on implicit
+multiplication, Householder is performed on the first <span class="math notranslate nohighlight">\(n\)</span> columns
+(not rows) of the extended array <span class="math notranslate nohighlight">\(\hat{A}\)</span>.</p></li>
+<li><p>In <a class="reference internal" href="L2_QR_factorisation.html"><span class="doc">QR factorisation</span></a>, the full <span class="math notranslate nohighlight">\(m\times m\)</span> matrix <span class="math notranslate nohighlight">\(Q\)</span> is
+obtained from <span class="math notranslate nohighlight">\(Qe_1,\ldots,Qe_m\)</span>, rather than <span class="math notranslate nohighlight">\(Qe_1,\ldots,Qe_n\)</span>
+(which give only <span class="math notranslate nohighlight">\(\hat{Q}\)</span>).</p></li>
+<li><p>In <a class="reference internal" href="L2_QR_factorisation.html"><span class="doc">QR factorisation</span></a>, in the least squares problem,
+<span class="math notranslate nohighlight">\(\hat{Q}\)</span> has orthonormal columns, and its column space equals that
+of <span class="math notranslate nohighlight">\(A\)</span> provided that <span class="math notranslate nohighlight">\(A\)</span> has full rank <span class="math notranslate nohighlight">\(n\)</span>, which is assumed.</p></li>
+<li><p>In <code class="docutils literal notranslate"><span class="pre">cla_utils/exercises2.py</span></code>, the docstring of <code class="docutils literal notranslate"><span class="pre">GS_modified_R</span></code>
+now refers to the upper (not lower) triangular formulation of
+modified Gram-Schmidt.</p></li>
+<li><p>In <code class="docutils literal notranslate"><span class="pre">cla_utils/exercises2.py</span></code>, the docstring of
+<code class="docutils literal notranslate"><span class="pre">GS_modified_get_R</span></code> now describes the modified Gram-Schmidt step:
+<span class="math notranslate nohighlight">\(R\)</span> normalises column <span class="math notranslate nohighlight">\(k\)</span> and makes the later columns orthogonal to
+it (rather than making column <span class="math notranslate nohighlight">\(k\)</span> orthogonal to the previous ones).</p></li>
+<li><p>In <code class="docutils literal notranslate"><span class="pre">test/test_exercises2.py</span></code>, <code class="docutils literal notranslate"><span class="pre">test_GS_modified_R</span></code> now also
+checks that <span class="math notranslate nohighlight">\(Q\)</span> has orthonormal columns and that <span class="math notranslate nohighlight">\(R\)</span> is upper
+triangular; previously a <code class="docutils literal notranslate"><span class="pre">GS_modified_get_R</span></code> returning the identity
+matrix would pass.</p></li>
+<li><p>In <code class="docutils literal notranslate"><span class="pre">cla_utils/exercises3.py</span></code>, the docstring of
+<code class="docutils literal notranslate"><span class="pre">householder_solve</span></code> describes the returned columns as solution
+vectors, rather than right-hand side vectors.</p></li>
+</ul>
+</section>
+<section id="chapter-4-analysing-algorithms">
+<h2>Chapter 4: Analysing algorithms<a class="headerlink" href="#chapter-4-analysing-algorithms" title="Link to this heading">¶</a></h2>
+<ul class="simple">
+<li><p>In <a class="reference internal" href="L3_analysing_algorithms.html"><span class="doc">Analysing algorithms</span></a>, in the operation count for
+modified Gram-Schmidt, the inner product is <span class="math notranslate nohighlight">\(r_{ij}\gets q_i^*v_j\)</span>,
+rather than <span class="math notranslate nohighlight">\(q_i^*v_i\)</span>.</p></li>
+<li><p>In <a class="reference internal" href="L3_analysing_algorithms.html"><span class="doc">Analysing algorithms</span></a>, modified Gram-Schmidt has <span class="math notranslate nohighlight">\(n-i\)</span>
+inner iterations over <span class="math notranslate nohighlight">\(j\)</span> for each <span class="math notranslate nohighlight">\(i\)</span>, rather than <span class="math notranslate nohighlight">\(n-i-1\)</span>.</p></li>
+<li><p>In <a class="reference internal" href="L3_analysing_algorithms.html"><span class="doc">Analysing algorithms</span></a>, the Frobenius norm is
+<span class="math notranslate nohighlight">\(\|A\|_F=\sqrt{\sum_{i,j}|A_{ij}|^2}\)</span>; the absolute value was
+missing, which matters for complex matrices.</p></li>
+<li><p>In <a class="reference internal" href="L3_analysing_algorithms.html"><span class="doc">Analysing algorithms</span></a>, the absolute and relative
+condition numbers are defined with a limit over small
+perturbations, <span class="math notranslate nohighlight">\(\lim_{\delta\to 0}\sup_{0&lt;\|\delta x\|\leq\delta}\)</span>,
+rather than a supremum over all <span class="math notranslate nohighlight">\(\delta x\neq 0\)</span>, so that they
+measure the conditioning of <span class="math notranslate nohighlight">\(f\)</span> at <span class="math notranslate nohighlight">\(x\)</span>.</p></li>
+<li><p>In <a class="reference internal" href="L3_analysing_algorithms.html"><span class="doc">Analysing algorithms</span></a>, in the example on the roots of
+<span class="math notranslate nohighlight">\(x^2-2x+c\)</span>, the perturbed coefficient should be <span class="math notranslate nohighlight">\(c=1-\delta c\)</span>
+(rather than <span class="math notranslate nohighlight">\(1+\delta c\)</span>) for the roots to be <span class="math notranslate nohighlight">\(1\pm\sqrt{\delta c}\)</span>.</p></li>
+<li><p>In <a class="reference internal" href="L3_analysing_algorithms.html"><span class="doc">Analysing algorithms</span></a>, machine epsilon
+<span class="math notranslate nohighlight">\(\varepsilon=2^{-53}\)</span> is half the distance between 1 and the next
+floating point number (which is <span class="math notranslate nohighlight">\(2^{-52}\)</span>), not the distance itself.</p></li>
+<li><p>In <a class="reference internal" href="L3_analysing_algorithms.html"><span class="doc">Analysing algorithms</span></a>, in the backward stability of
+the Householder algorithm, Householder transformations are
+reflections, not rotations.</p></li>
+<li><p>In <a class="reference internal" href="L3_analysing_algorithms.html"><span class="doc">Analysing algorithms</span></a>, the exercise on the stability of
+the Householder algorithm has been corrected: <span class="math notranslate nohighlight">\(R_1\)</span> is a random
+upper triangular matrix, and the exercise now states that
+<span class="math notranslate nohighlight">\(A=Q_1R_1\)</span> is formed and factorised as <span class="math notranslate nohighlight">\(A=Q_2R_2\)</span> before comparing.</p></li>
+<li><p>In <a class="reference internal" href="L3_analysing_algorithms.html"><span class="doc">Analysing algorithms</span></a>, each step of back substitution
+requires <span class="math notranslate nohighlight">\(m-i\)</span> multiplications and subtractions, rather than
+<span class="math notranslate nohighlight">\(m-i-1\)</span>.</p></li>
+<li><p>In <a class="reference internal" href="L3_analysing_algorithms.html"><span class="doc">Analysing algorithms</span></a>, backward stability of computing
+<span class="math notranslate nohighlight">\(\tilde{Q}^*b\)</span> means that <span class="math notranslate nohighlight">\((\tilde{Q}+\delta Q)\tilde{y}=b\)</span> for some
+small <span class="math notranslate nohighlight">\(\delta Q\)</span>; this does not follow from
+<span class="math notranslate nohighlight">\(\tilde{y}=(\tilde{Q}+\delta Q)^*b\)</span>, as was stated.</p></li>
+<li><p>In <a class="reference internal" href="L3_analysing_algorithms.html"><span class="doc">Analysing algorithms</span></a>, in the proof that solving
+<span class="math notranslate nohighlight">\(Ax=b\)</span> via QR is backward stable, the result should read
+<span class="math notranslate nohighlight">\(b=(A+\Delta A)\tilde{x}\)</span>; a bracket was misplaced.</p></li>
+</ul>
+</section>
+<section id="chapter-5-finding-eigenvalues-of-matrices">
+<h2>Chapter 5: Finding eigenvalues of matrices<a class="headerlink" href="#chapter-5-finding-eigenvalues-of-matrices" title="Link to this heading">¶</a></h2>
+<ul class="simple">
+<li><p>In <a class="reference internal" href="L5_eigenvalues.html"><span class="doc">Finding eigenvalues of matrices</span></a>, after the Schur factorisation theorem,
+the eigenvalues are read from the diagonal of <span class="math notranslate nohighlight">\(T\)</span>, not from the
+diagonal of <span class="math notranslate nohighlight">\(A\)</span>.</p></li>
+<li><p>In <a class="reference internal" href="L5_eigenvalues.html"><span class="doc">Finding eigenvalues of matrices</span></a>, the stopping criterion for the iterative
+transformation to Schur form should measure the strictly lower
+triangular part of <span class="math notranslate nohighlight">\(A_k\)</span>, rather than the lower triangular part
+of <span class="math notranslate nohighlight">\(A\)</span>.</p></li>
+<li><p>In <a class="reference internal" href="L5_eigenvalues.html"><span class="doc">Finding eigenvalues of matrices</span></a>, the argument for why the transformation
+to Schur form must be iterative should conclude that an explicit
+formula for the roots of the characteristic polynomial is
+impossible in general (not “explicit in general”).</p></li>
+<li><p>In <a class="reference internal" href="L5_eigenvalues.html"><span class="doc">Finding eigenvalues of matrices</span></a>, the reduction to upper Hessenberg form
+takes <span class="math notranslate nohighlight">\(m-2\)</span> steps, rather than <span class="math notranslate nohighlight">\(m-1\)</span>.</p></li>
+<li><p>In <a class="reference internal" href="L5_eigenvalues.html"><span class="doc">Finding eigenvalues of matrices</span></a>, in the explanation of why a single
+similarity transformation cannot triangularise <span class="math notranslate nohighlight">\(A\)</span>, the product
+should be <span class="math notranslate nohighlight">\(Q_1^*(Q_1^*A)^*\)</span> rather than <span class="math notranslate nohighlight">\(Q_1^*(Q_1^*A)\)</span>, and it
+forms linear combinations of rows, not columns.</p></li>
+<li><p>In <a class="reference internal" href="L5_eigenvalues.html"><span class="doc">Finding eigenvalues of matrices</span></a>, in the reduction to Hessenberg form,
+Householder transformations are reflections, not rotations.</p></li>
+<li><p>In <a class="reference internal" href="L5_eigenvalues.html"><span class="doc">Finding eigenvalues of matrices</span></a>, in the Hessenberg pseudo-code, the
+normalisation should be <span class="math notranslate nohighlight">\(v_k\gets v_k/\|v_k\|_2\)</span>, rather than
+<span class="math notranslate nohighlight">\(v_k/\|v\|_2\)</span>.</p></li>
+<li><p>In <a class="reference internal" href="L5_eigenvalues.html"><span class="doc">Finding eigenvalues of matrices</span></a>, in the operation count for the reduction
+to Hessenberg form, the right multiplication costs <span class="math notranslate nohighlight">\(\sim 2m^3\)</span>
+FLOPs; <span class="math notranslate nohighlight">\(\frac{10}{3}m^3\)</span> is the total for the left and right
+multiplications together.</p></li>
+<li><p>In <a class="reference internal" href="L5_eigenvalues.html"><span class="doc">Finding eigenvalues of matrices</span></a>, in the proof of convergence of power
+iteration, the eigenvector estimate follows from the eigenvector
+expansion of <span class="math notranslate nohighlight">\(A^kv^0\)</span>, not from the Taylor series; the eigenvalue
+estimate then follows from the quadratic accuracy of the Rayleigh
+quotient.</p></li>
+<li><p>In <a class="reference internal" href="L5_eigenvalues.html"><span class="doc">Finding eigenvalues of matrices</span></a>, the exercise on power iteration referred
+to <code class="docutils literal notranslate"><span class="pre">A3</span></code> and <code class="docutils literal notranslate"><span class="pre">B3</span></code>; the functions are
+<code class="xref py py-func docutils literal notranslate"><span class="pre">cla_utils.exercises9.get_A3()</span></code> and
+<code class="xref py py-func docutils literal notranslate"><span class="pre">cla_utils.exercises9.get_B3()</span></code>.</p></li>
+<li><p>In <a class="reference internal" href="L5_eigenvalues.html"><span class="doc">Finding eigenvalues of matrices</span></a>, inverse iteration converges to the
+eigenvector for which <span class="math notranslate nohighlight">\(1/|\lambda-\mu|\)</span> is largest (not smallest),
+i.e. whose eigenvalue is closest to <span class="math notranslate nohighlight">\(\mu\)</span>.</p></li>
+<li><p>In <a class="reference internal" href="L5_eigenvalues.html"><span class="doc">Finding eigenvalues of matrices</span></a>, in the convergence of Rayleigh quotient
+iteration, the eigenvalue error is <span class="math notranslate nohighlight">\(|\lambda^{(k)}-\lambda_J|\)</span>,
+rather than <span class="math notranslate nohighlight">\(|\lambda^{(k)}-q_J|\)</span>.</p></li>
+<li><p>In <a class="reference internal" href="L5_eigenvalues.html"><span class="doc">Finding eigenvalues of matrices</span></a>, the exercise on
+<code class="xref py py-func docutils literal notranslate"><span class="pre">cla_utils.exercises9.rq_it()</span></code> should ask for Rayleigh quotient
+iteration, rather than inverse iteration.</p></li>
+<li><p>In <a class="reference internal" href="L5_eigenvalues.html"><span class="doc">Finding eigenvalues of matrices</span></a>, in the hint on complex QR factorisation,
+<span class="math notranslate nohighlight">\(\mbox{sign}(x_1)\)</span> should be replaced by <span class="math notranslate nohighlight">\(e^{i\arg(x_1)}\)</span>, rather
+than <span class="math notranslate nohighlight">\(-e^{i\arg(x_1)}\)</span>; the minus sign reintroduces the
+cancellation that the choice of sign is meant to avoid.</p></li>
+<li><p>In <a class="reference internal" href="L5_eigenvalues.html"><span class="doc">Finding eigenvalues of matrices</span></a>, the convergence condition for
+simultaneous iteration with <span class="math notranslate nohighlight">\(n&lt;m\)</span> vectors also requires
+<span class="math notranslate nohighlight">\(|\lambda_n|&gt;|\lambda_{n+1}|\)</span>.</p></li>
+<li><p>In <a class="reference internal" href="L5_eigenvalues.html"><span class="doc">Finding eigenvalues of matrices</span></a>, in the simultaneous iteration
+pseudo-code, <span class="math notranslate nohighlight">\(\hat{Q}^{(0)}\)</span> is an <span class="math notranslate nohighlight">\(m\times n\)</span> matrix with
+orthonormal columns (unitary only when <span class="math notranslate nohighlight">\(n=m\)</span>), and the QR
+factorisation computes <span class="math notranslate nohighlight">\(\hat{Q}^{(k)},\hat{R}^{(k)}\)</span>.</p></li>
+<li><p>In <a class="reference internal" href="L5_eigenvalues.html"><span class="doc">Finding eigenvalues of matrices</span></a>, in the connection between the QR
+algorithm and inverse iteration, the indices should be <span class="math notranslate nohighlight">\(m\)</span> rather
+than <span class="math notranslate nohighlight">\(n\)</span> (<span class="math notranslate nohighlight">\(e_m\)</span>, <span class="math notranslate nohighlight">\(\tilde{r}^{(k)}_{mm}\)</span>), and the last column of
+<span class="math notranslate nohighlight">\({Q'}^{(k)}\)</span> is the result of <span class="math notranslate nohighlight">\(k\)</span> steps of inverse iteration with
+<span class="math notranslate nohighlight">\(\mu=0\)</span> applied to <span class="math notranslate nohighlight">\(A^T\)</span>, starting from <span class="math notranslate nohighlight">\(e_m\)</span>.</p></li>
+<li><p>In <a class="reference internal" href="L5_eigenvalues.html"><span class="doc">Finding eigenvalues of matrices</span></a>, in the description of shifts in the
+practical QR algorithm, it is the last diagonal entry of <span class="math notranslate nohighlight">\(A^{(k)}\)</span>
+(not of <span class="math notranslate nohighlight">\(R^{(k)}\)</span>) that converges, via inverse iteration, to the
+eigenvalue of <span class="math notranslate nohighlight">\(A\)</span> of smallest magnitude.</p></li>
+<li><p>In <a class="reference internal" href="L5_eigenvalues.html"><span class="doc">Finding eigenvalues of matrices</span></a>, the Rayleigh quotient shift computed
+from <span class="math notranslate nohighlight">\(A^{(k)}\)</span> is <span class="math notranslate nohighlight">\(A^{(k)}_{mm}=(q_m^{(k)})^TAq_m^{(k)}\)</span>, and it is
+used as the shift <span class="math notranslate nohighlight">\(\mu^{(k+1)}\)</span> for the next iteration (rather than
+<span class="math notranslate nohighlight">\(\mu^{(k)}\)</span>).</p></li>
+<li><p>In <code class="docutils literal notranslate"><span class="pre">cla_utils/exercises8.py</span></code>, <code class="docutils literal notranslate"><span class="pre">hessenberg_ev</span></code> used
+<code class="docutils literal notranslate"><span class="pre">cla_utils.norm</span></code> without importing <code class="docutils literal notranslate"><span class="pre">cla_utils</span></code>, so it (and hence
+<code class="docutils literal notranslate"><span class="pre">ev</span></code> and its test) failed with a <code class="docutils literal notranslate"><span class="pre">NameError</span></code>; it now uses
+<code class="docutils literal notranslate"><span class="pre">numpy.linalg.norm</span></code>.</p></li>
+<li><p>In <code class="docutils literal notranslate"><span class="pre">cla_utils/exercises9.py</span></code>, the docstrings of <code class="docutils literal notranslate"><span class="pre">inverse_it</span></code> and
+<code class="docutils literal notranslate"><span class="pre">rq_it</span></code> have been corrected (<code class="docutils literal notranslate"><span class="pre">rq_it</span></code> had text copied from
+<code class="docutils literal notranslate"><span class="pre">inverse_it</span></code>, and its eigenvalue history has length <code class="docutils literal notranslate"><span class="pre">maxit</span></code>), and
+“factoration” is now “factorisation”.</p></li>
+</ul>
+</section>
+<section id="chapter-6-krylov-methods">
+<h2>Chapter 6: Krylov methods<a class="headerlink" href="#chapter-6-krylov-methods" title="Link to this heading">¶</a></h2>
 <ul class="simple">
 <li><p>In <a class="reference internal" href="L6_krylov.html"><span class="doc">Iterative Krylov methods for Ax=b</span></a>, the last column of the Krylov matrix <span class="math notranslate nohighlight">\(K_n\)</span>
 should be <span class="math notranslate nohighlight">\(A^{n-1}b\)</span>, rather than <span class="math notranslate nohighlight">\(A^{n_1}b\)</span>.</p></li>
@@ -74,6 +260,15 @@ error is bounded by the condition number of <span class="math notranslate nohigh
 times the relative residual; if the condition number is large, a
 small residual can coexist with a large relative error (not a
 large condition number).</p></li>
+<li><p>In <code class="docutils literal notranslate"><span class="pre">cla_utils/exercises10.py</span></code>, <code class="docutils literal notranslate"><span class="pre">get_AA100</span></code>, <code class="docutils literal notranslate"><span class="pre">get_BB100</span></code> and
+<code class="docutils literal notranslate"><span class="pre">get_CC100</span></code> now load their data files from the <code class="docutils literal notranslate"><span class="pre">cla_utils</span></code>
+directory; previously they only worked when run from inside that
+directory.</p></li>
+</ul>
+</section>
+<section id="chapter-7-preconditioning-krylov-methods">
+<h2>Chapter 7: Preconditioning Krylov methods<a class="headerlink" href="#chapter-7-preconditioning-krylov-methods" title="Link to this heading">¶</a></h2>
+<ul class="simple">
 <li><p>In <a class="reference internal" href="L7_preconditioning.html"><span class="doc">Preconditioning Krylov methods</span></a>, in the proof that a stationary method
 does not converge when <span class="math notranslate nohighlight">\(\rho(C)\geq 1\)</span>, the eigenvalue condition
 <span class="math notranslate nohighlight">\(|\lambda|&gt;1\)</span> should be <span class="math notranslate nohighlight">\(|\lambda|\geq 1\)</span>, to include the case
@@ -127,6 +322,7 @@ for diagonalizable matrices, eigenvector conditioning also enters
 the convergence bound. The simplified proof of stationary convergence
 when <span class="math notranslate nohighlight">\(\rho(C)&lt;1\)</span> covers the diagonalizable case.</p></li>
 </ul>
+</section>
 </section>
 
 
