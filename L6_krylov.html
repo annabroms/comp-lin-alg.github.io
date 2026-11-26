@@ -79,13 +79,15 @@ Supplementary video</summary><div class="video_wrapper" style="">
 </iframe></div></details><p>In this section we will introduce Krylov subspace methods for solving
 <span class="math notranslate nohighlight">\(Ax=b\)</span> (we will not specialise to real or symmetric matrices
 here). The idea is to approximate the solution using the basis</p>
-<div class="math notranslate nohighlight">
-\[(b, Ab, A^2b, A^3b, \ldots, A^kb)\]</div>
+<blockquote>
+<div><div class="math notranslate nohighlight">
+\[(b, Ab, A^2b, A^3b, \ldots, A^{n-1}b)\]</div>
+</div></blockquote>
 <p>whose span is called a Krylov subspace. After each iteration the
 Krylov subspace grows by one dimension. As we have already seen from
 studying power iteration, the later elements in this sequence will get
-very parallel (they will all be approximating the eigenvector with
-largest magnitude of eigenvalue). Hence, we once again need to resort
+very parallel (they will all be approximating the eigenvector whose
+eigenvalue has the largest magnitude). Hence, we once again need to resort
 to orthogonalising the basis. We could simply take the QR
 factorisation of this basis, but the Arnoldi iteration coming up
 next also provides a neat way to solve the equation when projected
@@ -94,8 +96,8 @@ onto the Krylov subspace.</p>
 <section id="arnoldi-iteration">
 <h2><span class="section-number">6.2. </span>Arnoldi iteration<a class="headerlink" href="#arnoldi-iteration" title="Link to this heading">¶</a></h2>
 <p>The key to Krylov subspace methods turns out to be the transformation
-of <span class="math notranslate nohighlight">\(A\)</span> to an upper Hessenberg matrix by orthogonal similarity
-transforms, so that <span class="math notranslate nohighlight">\(A=QHQ^*\)</span>. We have already looked at using
+of <span class="math notranslate nohighlight">\(A\)</span> to an upper Hessenberg matrix by unitary similarity
+transformations, so that <span class="math notranslate nohighlight">\(A=QHQ^*\)</span>. We have already looked at using
 Householder transformations to do this in the previous section.
 The Householder technique is not so suitable for large dimensional
 problems, so instead we look at a way of proceeding column by
@@ -103,8 +105,8 @@ column, just like the Gram-Schmidt method does for finding
 <span class="math notranslate nohighlight">\(QR\)</span> factorisations.</p>
 <p>We do this by rewriting <span class="math notranslate nohighlight">\(AQ=QH\)</span>. The idea is that at iteration <span class="math notranslate nohighlight">\(n\)</span> we
 only look at the first <span class="math notranslate nohighlight">\(n\)</span> columns of <span class="math notranslate nohighlight">\(Q\)</span>, which we
-call <span class="math notranslate nohighlight">\(\hat{Q}_n\)</span>. When <span class="math notranslate nohighlight">\(m\)</span> is large, this is a significant saving:
-<span class="math notranslate nohighlight">\(mn \ll m^2\)</span>.
+call <span class="math notranslate nohighlight">\(\hat{Q}_n\)</span>. When <span class="math notranslate nohighlight">\(m\)</span> is large and <span class="math notranslate nohighlight">\(n\ll m\)</span>, this is a
+significant saving: <span class="math notranslate nohighlight">\(mn \ll m^2\)</span>.
 To execute the iteration, it turns out that
 we should look at the <span class="math notranslate nohighlight">\((n+1)\times n\)</span> upper left-hand section of <span class="math notranslate nohighlight">\(H\)</span>,
 i.e.</p>
@@ -129,7 +131,7 @@ we see that the <span class="math notranslate nohighlight">\(n\)</span>-th colum
 \[Aq_n = h_{1n}q_1 + h_{2n}q_2 + \ldots + h_{n,n}q_n + h_{n+1,n}q_{n+1}.\]</div>
 </div></blockquote>
 <p>This formula shows us how to construct the non-zero entries of the
-nth column of <span class="math notranslate nohighlight">\(H\)</span>; this defines the Arnoldi algorithm which we
+<span class="math notranslate nohighlight">\(n\)</span>-th column of <span class="math notranslate nohighlight">\(H\)</span>; this defines the Arnoldi algorithm which we
 provide as pseudo-code below.</p>
 <ul class="simple">
 <li><p><span class="math notranslate nohighlight">\(q_1\gets b/\|b\|\)</span></p></li>
@@ -149,7 +151,22 @@ provide as pseudo-code below.</p>
 </li>
 <li><p>END FOR</p></li>
 </ul>
+<p>If <span class="math notranslate nohighlight">\(h_{n+1,n}=0\)</span> at some step, then <span class="math notranslate nohighlight">\(q_{n+1}\)</span> cannot be formed. This
+is called a breakdown, but it is a fortunate one: it means that
+<span class="math notranslate nohighlight">\(A\hat{Q}_n=\hat{Q}_nH_n\)</span>, so the Krylov subspace
+<span class="math notranslate nohighlight">\(\mathrm{span}(K_n)\)</span> is invariant under <span class="math notranslate nohighlight">\(A\)</span>. If <span class="math notranslate nohighlight">\(A\)</span> is invertible,
+the exact solution of <span class="math notranslate nohighlight">\(Ax=b\)</span> then lies in this subspace, and GMRES
+(below) finds it at this step.</p>
 <div class="proof proof-type-exercise" id="id1">
+
+    <div class="proof-title">
+        <span class="proof-type">Exercise </span>
+        
+    </div><div class="proof-content">
+<p>Suppose that <span class="math notranslate nohighlight">\(A\)</span> is invertible and that <span class="math notranslate nohighlight">\(h_{n+1,n}=0\)</span>. Show that
+<span class="math notranslate nohighlight">\(H_n\)</span> is invertible, and that <span class="math notranslate nohighlight">\(x=\hat{Q}_nH_n^{-1}\|b\|e_1\)</span>
+solves <span class="math notranslate nohighlight">\(Ax=b\)</span>.</p>
+</div></div><div class="proof proof-type-exercise" id="id2">
 
     <div class="proof-title">
         <span class="proof-type">Exercise </span>
@@ -168,12 +185,14 @@ matrix</p>
 <blockquote>
 <div><div class="math notranslate nohighlight">
 \[\begin{split}K_n = \begin{pmatrix}
-b &amp; Ab &amp; \ldots &amp; A^{n_1}b \\
+b &amp; Ab &amp; \ldots &amp; A^{n-1}b \\
 \end{pmatrix}\end{split}\]</div>
 </div></blockquote>
-<p>then we would get <span class="math notranslate nohighlight">\(Q=\hat{Q}_n\)</span>. Importantly, in the Arnoldi iteration, we
-never form <span class="math notranslate nohighlight">\(K_n\)</span> or <span class="math notranslate nohighlight">\(R_n\)</span> explicitly, since these are very
-ill-conditioned and not useful numerically.</p>
+<p>then we would get <span class="math notranslate nohighlight">\(K_n=\hat{Q}_nR_n\)</span>, i.e. the orthonormal factor is
+exactly the matrix <span class="math notranslate nohighlight">\(\hat{Q}_n\)</span> from the Arnoldi iteration.
+Importantly, in the Arnoldi iteration, we never form <span class="math notranslate nohighlight">\(K_n\)</span> or <span class="math notranslate nohighlight">\(R_n\)</span>
+explicitly, since these are very ill-conditioned and not useful
+numerically.</p>
 <details>
 <summary>
 Supplementary video</summary><div class="video_wrapper" style="">
@@ -182,28 +201,32 @@ Supplementary video</summary><div class="video_wrapper" style="">
 <span class="math notranslate nohighlight">\(\hat{Q}_n^*\)</span> to <span class="math notranslate nohighlight">\(A\hat{Q}_n = \hat{Q}_{n+1}\tilde{H}_n\)</span> gives</p>
 <blockquote>
 <div><div class="math notranslate nohighlight">
-\[ \begin{align}\begin{aligned}\hat{Q}_n^*A\hat{Q}_n = \hat{Q}_n^*\hat{Q}_{n+1}\tilde{H}_n,\\\begin{split}= \begin{pmatrix}
+\[\begin{split}\hat{Q}_n^*A\hat{Q}_n = \hat{Q}_n^*\hat{Q}_{n+1}\tilde{H}_n
+= \begin{pmatrix}
 1 &amp; 0 &amp; \ldots &amp; 0 &amp; 0 \\
 0 &amp; \ddots &amp; \ddots &amp; \vdots &amp; \vdots \\
 \vdots &amp; \ddots &amp; \ddots &amp; \vdots &amp; \vdots \\
 0 &amp; \ldots &amp; \ldots &amp; 1 &amp; 0 \\
 \end{pmatrix}
 \tilde{H}_n
-= H_n,\end{split}\end{aligned}\end{align} \]</div>
+= H_n,\end{split}\]</div>
 </div></blockquote>
 <p>where <span class="math notranslate nohighlight">\(H_n\)</span> is the <span class="math notranslate nohighlight">\(n\times n\)</span> top left-hand corner of <span class="math notranslate nohighlight">\(H\)</span>.</p>
 <details>
 <summary>
 Supplementary video</summary><div class="video_wrapper" style="">
 <iframe allowfullscreen="true" src="https://player.vimeo.com/video/454171516" style="border: 0; height: 345px; width: 560px">
-</iframe></div></details><p>The intrepretation of this is that <span class="math notranslate nohighlight">\(H_n\)</span> is the orthogonal projection
-of <span class="math notranslate nohighlight">\(A\)</span> onto the Krylov subspace <span class="math notranslate nohighlight">\(\mathrm{span}(K_n)\)</span>. To see this, take any vector <span class="math notranslate nohighlight">\(v\)</span>,
-and project <span class="math notranslate nohighlight">\(Av\)</span> onto the the Krylov subspace <span class="math notranslate nohighlight">\(\mathrm{span}(K_n)\)</span>.</p>
+</iframe></div></details><p>The interpretation of this is that <span class="math notranslate nohighlight">\(H_n\)</span> is the matrix of the
+orthogonal projection of <span class="math notranslate nohighlight">\(A\)</span> onto the Krylov subspace
+<span class="math notranslate nohighlight">\(\mathrm{span}(K_n)\)</span>, written in the basis <span class="math notranslate nohighlight">\(q_1,\ldots,q_n\)</span>. To see
+this, take any vector <span class="math notranslate nohighlight">\(v\in\mathrm{span}(K_n)\)</span>, and project <span class="math notranslate nohighlight">\(Av\)</span> onto
+the Krylov subspace <span class="math notranslate nohighlight">\(\mathrm{span}(K_n)\)</span>,</p>
 <blockquote>
 <div><div class="math notranslate nohighlight">
-\[PAv = \hat{Q}_n\hat{Q}_n^*v.\]</div>
+\[PAv = \hat{Q}_n\hat{Q}_n^*Av.\]</div>
 </div></blockquote>
-<p>Then, changing basis to the orthogonal basis gives</p>
+<p>Then, writing <span class="math notranslate nohighlight">\(v=\hat{Q}_nw\)</span> and changing to coordinates in the
+orthonormal basis <span class="math notranslate nohighlight">\(q_1,\ldots,q_n\)</span>, the matrix of this map is</p>
 <blockquote>
 <div><div class="math notranslate nohighlight">
 \[\hat{Q}_n^*(\hat{Q}_n\hat{Q}_n^*A)\hat{Q}_n = \hat{Q}_n^*A\hat{Q}_n
@@ -216,12 +239,14 @@ and project <span class="math notranslate nohighlight">\(Av\)</span> onto the th
 <summary>
 Supplementary video</summary><div class="video_wrapper" style="">
 <iframe allowfullscreen="true" src="https://player.vimeo.com/video/454171559" style="border: 0; height: 345px; width: 560px">
-</iframe></div></details><p>The Generalised Minimum Residual method (GMRES), due to Saad (1986),
+</iframe></div></details><p>The Generalised Minimum Residual method (GMRES), due to Saad and
+Schultz (1986),
 exploits these properties of the Arnoldi iteration. The idea is
-that we build up the orthogonal basis for the Krylov subspaces
-one by one, and at each iteration we solve the projection of
-<span class="math notranslate nohighlight">\(Ax=b\)</span> onto the Krylov basis as a least squares problem, until
-the residual <span class="math notranslate nohighlight">\(\|Ax-b\|\)</span> is below some desired tolerance.</p>
+that we build up the orthonormal basis for the Krylov subspaces
+one by one, and at each iteration we find the vector in the current
+Krylov subspace that minimises the residual <span class="math notranslate nohighlight">\(\|Ax-b\|\)</span>, by solving
+a small least squares problem. We stop when the residual is below
+some desired tolerance.</p>
 <p>To avoid the numerical instabilities that would come from using the
 basis <span class="math notranslate nohighlight">\((b,Ab,A^2b,\ldots)\)</span>, we use the Arnoldi iteration to build an
 orthonormal basis, and seek approximate solutions of the form <span class="math notranslate nohighlight">\(x_n =
@@ -233,17 +258,19 @@ that minimises the residual</p>
 </div></blockquote>
 <p>This explains the Minimum Residual part of the name. We also see from
 this definition that the residual cannot increase with iterations,
-because it only increases the subspace where we seek a solution.</p>
+because each iteration enlarges the subspace in which we seek a
+solution, so the previous minimiser is still available.</p>
 <p>This problem can be simplified further by using <span class="math notranslate nohighlight">\(A\hat{Q}_n = \hat{Q}_{n+1}\tilde{H}_n\)</span>,
 so</p>
 <blockquote>
 <div><div class="math notranslate nohighlight">
 \[\mathcal{R}_n = \|\hat{Q}_{n+1}\tilde{H}_n y - b\|.\]</div>
 </div></blockquote>
-<p>Remembering that <span class="math notranslate nohighlight">\(b=\|b\|q_1\)</span>, we see that the entire residual is in
-the column space of <span class="math notranslate nohighlight">\(\hat{Q}_{n+1}\)</span>, and hence we can invert
-on the column space using <span class="math notranslate nohighlight">\(\hat{Q}_{n+1}^*\)</span> which does not change
-the norm of the residual due to the orthonormality.</p>
+<p>Remembering that <span class="math notranslate nohighlight">\(b=\|b\|q_1\)</span>, we see that the entire residual
+<span class="math notranslate nohighlight">\(\hat{Q}_{n+1}\tilde{H}_ny-b\)</span> lies in the column space of
+<span class="math notranslate nohighlight">\(\hat{Q}_{n+1}\)</span>. Multiplying a vector in this column space by
+<span class="math notranslate nohighlight">\(\hat{Q}_{n+1}^*\)</span> does not change its norm, since the columns of
+<span class="math notranslate nohighlight">\(\hat{Q}_{n+1}\)</span> are orthonormal. Hence</p>
 <blockquote>
 <div><div class="math notranslate nohighlight">
 \[\mathcal{R}_n = \|\tilde{H}_n y - \hat{Q}_{n+1}^*b\|
@@ -251,7 +278,13 @@ the norm of the residual due to the orthonormality.</p>
 </div></blockquote>
 <p>Finding <span class="math notranslate nohighlight">\(y\)</span> to minimise <span class="math notranslate nohighlight">\(\mathcal{R}_n\)</span> requires the solution of a
 least squares problem, which can be computed via QR factorisation
-as we saw much earlier in the course.</p>
+as we saw much earlier in the course. Here
+<span class="math notranslate nohighlight">\(e_1=(1,0,\ldots,0)^T\in\mathbb{C}^{n+1}\)</span> is the first standard
+basis vector: since <span class="math notranslate nohighlight">\(b=\|b\|q_1\)</span> and <span class="math notranslate nohighlight">\(q_1\)</span> is orthogonal to
+<span class="math notranslate nohighlight">\(q_2,\ldots,q_{n+1}\)</span>, only the first entry of <span class="math notranslate nohighlight">\(\hat{Q}_{n+1}^*b\)</span> is
+nonzero. Note that <span class="math notranslate nohighlight">\(\mathcal{R}_n\)</span> can be computed from this small
+<span class="math notranslate nohighlight">\((n+1)\times n\)</span> problem, without forming <span class="math notranslate nohighlight">\(x_n\)</span>, so in practice <span class="math notranslate nohighlight">\(x_n\)</span>
+only needs to be computed once the iteration stops.</p>
 <details>
 <summary>
 Supplementary video</summary><div class="video_wrapper" style="">
@@ -269,7 +302,11 @@ Supplementary video</summary><div class="video_wrapper" style="">
 </li>
 <li><p>END FOR</p></li>
 </ul>
-<div class="proof proof-type-exercise" id="id2">
+<p>Here we have implicitly used the initial guess <span class="math notranslate nohighlight">\(x_0=0\)</span>. For a
+nonzero initial guess <span class="math notranslate nohighlight">\(x_0\)</span>, we apply the same algorithm to
+<span class="math notranslate nohighlight">\(Ae=r_0\)</span>, where <span class="math notranslate nohighlight">\(r_0=b-Ax_0\)</span>, and set <span class="math notranslate nohighlight">\(x_n=x_0+e_n\)</span>. In other words,
+the Krylov subspace is generated from <span class="math notranslate nohighlight">\(r_0\)</span> instead of <span class="math notranslate nohighlight">\(b\)</span>.</p>
+<div class="proof proof-type-exercise" id="id3">
 
     <div class="proof-title">
         <span class="proof-type">Exercise </span>
@@ -282,17 +319,18 @@ paste code from your <code class="xref py py-func docutils literal notranslate">
 implementation, and you should use your least squares code to solve
 the least squares problem.  The test script <code class="docutils literal notranslate"><span class="pre">test_exercises10.py</span></code>
 in the <code class="docutils literal notranslate"><span class="pre">test</span></code> directory will test this function.</p>
-</div></div><div class="proof proof-type-exercise" id="id3">
+</div></div><div class="proof proof-type-exercise" id="id4">
 
     <div class="proof-title">
         <span class="proof-type">Exercise </span>
         
     </div><div class="proof-content">
 <p>The least squares problem in GMRES requires the QR
-factorisation of <span class="math notranslate nohighlight">\(H_k\)</span>. It is wasteful to rebuild this from scratch
-given that we just computed the QR factorisation of
-<span class="math notranslate nohighlight">\(H_{k-1}\)</span>. Modify your code so that it recycles the QR
-factorisation, applying just one extra Householder rotation per
+factorisation of <span class="math notranslate nohighlight">\(\tilde{H}_k\)</span>. It is wasteful to rebuild this from
+scratch given that we just computed the QR factorisation of
+<span class="math notranslate nohighlight">\(\tilde{H}_{k-1}\)</span>. Modify your code so that it recycles the QR
+factorisation: apply the previous reflections to the new column of
+<span class="math notranslate nohighlight">\(\tilde{H}_k\)</span>, and then just one extra Householder reflection per
 GMRES iteration. Don’t forget to check that it still passes the
 test.</p>
 </div></div><div class="admonition hint">
@@ -315,23 +353,23 @@ of GMRES using matrix polynomials.</p>
 <blockquote>
 <div><div class="math notranslate nohighlight">
 \[x_n = c_0b + c_1Ab + c_2A^2b + \ldots + c_{n-1}A^{n-1}b
-= p'(A)b,\]</div>
+= \phi(A)b,\]</div>
 </div></blockquote>
 <p>where</p>
 <blockquote>
 <div><div class="math notranslate nohighlight">
-\[p'(z) = c_0 + c_1z + c_2z^2 + \ldots + \ldots c_{n-1}z^{n-1} \implies
-p'(A) = c_0I + c_1A + c_2A^2 + \ldots + c_{n-1}A^{n-1}.\]</div>
+\[\phi(z) = c_0 + c_1z + c_2z^2 + \ldots + c_{n-1}z^{n-1} \implies
+\phi(A) = c_0I + c_1A + c_2A^2 + \ldots + c_{n-1}A^{n-1}.\]</div>
 </div></blockquote>
 <p>Here we have introduced the idea of a matrix polynomial, where the
-kth power of <span class="math notranslate nohighlight">\(z\)</span> is replaced by the kth power of <span class="math notranslate nohighlight">\(A\)</span>.</p>
+<span class="math notranslate nohighlight">\(k\)</span>-th power of <span class="math notranslate nohighlight">\(z\)</span> is replaced by the <span class="math notranslate nohighlight">\(k\)</span>-th power of <span class="math notranslate nohighlight">\(A\)</span>.</p>
 <p>The residual becomes</p>
 <blockquote>
 <div><div class="math notranslate nohighlight">
-\[r_n = b - Ax_n = b - Ap'(A)b = (I - Ap'(A))b
+\[r_n = b - Ax_n = b - A\phi(A)b = (I - A\phi(A))b
 = p(A)b,\]</div>
 </div></blockquote>
-<p>where <span class="math notranslate nohighlight">\(p(z) = 1 - zp'(z)\)</span>. Thus, the residual is a matrix polynomial
+<p>where <span class="math notranslate nohighlight">\(p(z) = 1 - z\phi(z)\)</span>. Thus, the residual is a matrix polynomial
 <span class="math notranslate nohighlight">\(p\)</span> of <span class="math notranslate nohighlight">\(A\)</span> applied to <span class="math notranslate nohighlight">\(b\)</span>, where <span class="math notranslate nohighlight">\(p\in \mathcal{P}_n\)</span>, and</p>
 <blockquote>
 <div><div class="math notranslate nohighlight">
@@ -347,32 +385,43 @@ optimisation problem: find <span class="math notranslate nohighlight">\(p_n\in \
 \implies \frac{\|r_n\|}{\|b\|} \leq \|p_n(A)\|.\]</div>
 </div></blockquote>
 <p>Assuming that <span class="math notranslate nohighlight">\(A\)</span> is diagonalisable, <span class="math notranslate nohighlight">\(A=V\Lambda V^{-1}\)</span>, then
-<span class="math notranslate nohighlight">\(A^s=V\Lambda^sV^{-1}\)</span>, and</p>
+<span class="math notranslate nohighlight">\(A^s=V\Lambda^sV^{-1}\)</span> for every <span class="math notranslate nohighlight">\(s\geq 0\)</span>. Since <span class="math notranslate nohighlight">\(p_n(A)\)</span> is a
+linear combination of such powers, <span class="math notranslate nohighlight">\(p_n(A)=Vp_n(\Lambda)V^{-1}\)</span>, and</p>
 <blockquote>
 <div><div class="math notranslate nohighlight">
-\[\|p_n(A)\| = \|Vp_n(\Lambda^s)V^{-1}\|
+\[\|p_n(A)\| = \|Vp_n(\Lambda)V^{-1}\|
 \leq \underbrace{\|V\|\|V^{-1}\|}_{=\kappa(V)}
 \|p_n\|_{\Lambda(A)},\]</div>
 </div></blockquote>
 <p>where <span class="math notranslate nohighlight">\(\Lambda(A)\)</span> is the set of eigenvalues of <span class="math notranslate nohighlight">\(A\)</span>, and</p>
 <blockquote>
 <div><div class="math notranslate nohighlight">
-\[\|p\|_{\Lambda(A)} = \sup_{x\in \Lambda(A)}\|p(x)\|.\]</div>
+\[\|p\|_{\Lambda(A)} = \sup_{\lambda\in \Lambda(A)}|p(\lambda)|.\]</div>
 </div></blockquote>
+<p>Since <span class="math notranslate nohighlight">\(p_n\)</span> minimises <span class="math notranslate nohighlight">\(\|p(A)b\|\)</span> over <span class="math notranslate nohighlight">\(\mathcal{P}_n\)</span>, we have
+<span class="math notranslate nohighlight">\(\|r_n\|\leq\|p(A)b\|\)</span> for every <span class="math notranslate nohighlight">\(p\in\mathcal{P}_n\)</span>, so the same
+bound <span class="math notranslate nohighlight">\(\|r_n\|/\|b\|\leq\kappa(V)\|p\|_{\Lambda(A)}\)</span> holds for any
+<span class="math notranslate nohighlight">\(p\in\mathcal{P}_n\)</span>.</p>
 <p>Hence we see that GMRES will converge quickly if <span class="math notranslate nohighlight">\(V\)</span> is
-well-conditioned, and <span class="math notranslate nohighlight">\(p(x)\)</span> is small for all <span class="math notranslate nohighlight">\(x\in \Lambda(A)\)</span>.  This
+well-conditioned, and there is some <span class="math notranslate nohighlight">\(p\in\mathcal{P}_n\)</span> with
+<span class="math notranslate nohighlight">\(p(\lambda)\)</span> small for all <span class="math notranslate nohighlight">\(\lambda\in \Lambda(A)\)</span>.  This
 latter condition is not trivial due to the <span class="math notranslate nohighlight">\(p(0)=1\)</span> requirement. One
 way it can happen is if <span class="math notranslate nohighlight">\(A\)</span> has all eigenvalues clustered in a small
-number of groups, away from $0$. Then we can find a low degree
-polynomial that passes through 1 at <span class="math notranslate nohighlight">\(x=0\)</span>, and 0 near each of the
+number of groups, away from <span class="math notranslate nohighlight">\(0\)</span>. Then we can find a low degree
+polynomial that passes through 1 at <span class="math notranslate nohighlight">\(z=0\)</span>, and 0 near each of the
 clusters. Then GMRES will essentially converge in a small number of
-iterations (equal to the degree of the polynomial). There are problems
+iterations (roughly the degree of the polynomial). In the extreme
+case where <span class="math notranslate nohighlight">\(A\)</span> has only <span class="math notranslate nohighlight">\(k\)</span> distinct eigenvalues
+<span class="math notranslate nohighlight">\(\lambda_1,\ldots,\lambda_k\)</span>, the polynomial
+<span class="math notranslate nohighlight">\(p(z)=\prod_{j=1}^k(1-z/\lambda_j)\)</span> lies in <span class="math notranslate nohighlight">\(\mathcal{P}_k\)</span> and
+vanishes at every eigenvalue, so GMRES finds the exact solution in at
+most <span class="math notranslate nohighlight">\(k\)</span> iterations (in exact arithmetic). There are problems
 if the eigenvalues are scattered over a wide region of the complex
-plane: we need a very high degree polynomial to make <span class="math notranslate nohighlight">\(p(x)\)</span> small at
+plane: we need a very high degree polynomial to make <span class="math notranslate nohighlight">\(p(\lambda)\)</span> small at
 all the eigenvalues and hence we need a very large number of
 iterations. Similarly there are problems if eigenvalues are very close
 to zero.</p>
-<div class="proof proof-type-exercise" id="id4">
+<div class="proof proof-type-exercise" id="id5">
 
     <div class="proof-title">
         <span class="proof-type">Exercise </span>
@@ -394,7 +443,7 @@ causes this different behaviour?</p>
 Supplementary video</summary><div class="video_wrapper" style="">
 <iframe allowfullscreen="true" src="https://player.vimeo.com/video/454218547" style="border: 0; height: 345px; width: 560px">
 </iframe></div></details><p>This final topic has been a strong focus of computational linear algebra
-over the last 30 years. Typically, the matrices that we want to solve
+for several decades. Typically, the matrices that we want to solve
 do not have eigenvalues clustered in a small number of groups, and so
 GMRES is slow. The solution (and the challenge) is to find a matrix
 <span class="math notranslate nohighlight">\(\hat{A}\)</span> such that <span class="math notranslate nohighlight">\(\hat{A}x = y\)</span> is cheap to solve (diagonal, or triangular, or
@@ -417,13 +466,13 @@ called preconditioned GMRES.</p>
 <li><p>SOLVE <span class="math notranslate nohighlight">\(\hat{A}v = Aq_n\)</span></p></li>
 <li><p>FOR <span class="math notranslate nohighlight">\(j=1\)</span> TO <span class="math notranslate nohighlight">\(n\)</span></p>
 <ul>
-<li><p><span class="math notranslate nohighlight">\(h_{jn}=q_j^*v\)</span></p></li>
-<li><p><span class="math notranslate nohighlight">\(v = v - h_{jn}q_j\)</span></p></li>
+<li><p><span class="math notranslate nohighlight">\(h_{jn}\gets q_j^*v\)</span></p></li>
+<li><p><span class="math notranslate nohighlight">\(v \gets v - h_{jn}q_j\)</span></p></li>
 </ul>
 </li>
 <li><p>END FOR</p></li>
 <li><p><span class="math notranslate nohighlight">\(h_{n+1,n} \gets \|v\|\)</span></p></li>
-<li><p><span class="math notranslate nohighlight">\(q_{n+1}\)</span>gets v/|v|`</p></li>
+<li><p><span class="math notranslate nohighlight">\(q_{n+1} \gets v/\|v\|\)</span></p></li>
 <li><p>FIND <span class="math notranslate nohighlight">\(y\)</span> TO MINIMIZE <span class="math notranslate nohighlight">\(\|\tilde{H}_ny - \|\tilde{b}\|e_1\|\)</span></p></li>
 <li><p><span class="math notranslate nohighlight">\(x_n \gets \hat{Q}_ny\)</span></p></li>
 <li><p>CHECK IF <span class="math notranslate nohighlight">\(\mathcal{R}_n &lt;\)</span> TOL</p></li>
@@ -431,7 +480,13 @@ called preconditioned GMRES.</p>
 </li>
 <li><p>END FOR</p></li>
 </ul>
-<div class="proof proof-type-exercise" id="id5">
+<p>Note that in this algorithm, the residual norm checked against the
+tolerance is <span class="math notranslate nohighlight">\(\mathcal{R}_n=\|\hat{A}^{-1}r_n\|\)</span>, the norm of the
+<em>preconditioned</em> residual, rather than <span class="math notranslate nohighlight">\(\|r_n\|\)</span>, where
+<span class="math notranslate nohighlight">\(r_n=b-Ax_n\)</span>. Since <span class="math notranslate nohighlight">\(\|r_n\|\leq\|\hat{A}\|\|\hat{A}^{-1}r_n\|\)</span>,
+a small preconditioned residual does not by itself guarantee a small
+true residual.</p>
+<div class="proof proof-type-exercise" id="id6">
 
     <div class="proof-title">
         <span class="proof-type">Exercise </span>
@@ -449,33 +504,38 @@ today.</p>
 <section id="knowing-when-to-stop">
 <h2><span class="section-number">6.6. </span>Knowing when to stop<a class="headerlink" href="#knowing-when-to-stop" title="Link to this heading">¶</a></h2>
 <p>We should stop an iterative method when the error is sufficiently small.
-But, we don’t have access the the exact solution, so we can’t compute the
+But, we don’t have access to the exact solution, so we can’t compute the
 error. Two things we can look at are:</p>
 <ul class="simple">
-<li><p>The residual <span class="math notranslate nohighlight">\({r}^k=A{x}^k-{b}\)</span>, or</p></li>
-<li><p>The pseudo-residual <span class="math notranslate nohighlight">\({s}^k = {x}^{k+1}-{x}^k\)</span>,
-which both tend to zero as <span class="math notranslate nohighlight">\({x}^k\to{x}^*\)</span> provided that <span class="math notranslate nohighlight">\(A\)</span> is
-invertible.</p></li>
+<li><p>The residual <span class="math notranslate nohighlight">\({r}^k={b}-A{x}^k\)</span>, or</p></li>
+<li><p>The pseudo-residual <span class="math notranslate nohighlight">\({s}^k = {x}^{k+1}-{x}^k\)</span>.</p></li>
 </ul>
-<p>How do their sizes relate to the size of <span class="math notranslate nohighlight">\({e}^k={x}^k-{x}^*\)</span>?</p>
-<div class="math notranslate nohighlight">
-\[\begin{split}{e}^k  = &amp; {x}^* - {x}^k \\
- = &amp; A^{-1}(A{x}^*-A{x}^k) \\
- = &amp; A^{-1}({b}-A{x}^k) \\
- = &amp; A^{-1}{r}^k,\end{split}\]</div>
+<p>Both tend to zero as <span class="math notranslate nohighlight">\({x}^k\to{x}^*\)</span>. We would like the converse:
+that a small residual or pseudo-residual implies a small error
+<span class="math notranslate nohighlight">\({e}^k={x}^*-{x}^k\)</span>. For the residual, this requires <span class="math notranslate nohighlight">\(A\)</span> to be
+invertible, as the following shows.</p>
+<blockquote>
+<div><div class="math notranslate nohighlight">
+\[\begin{split}{e}^k &amp;= {x}^* - {x}^k \\
+&amp;= A^{-1}(A{x}^*-A{x}^k) \\
+&amp;= A^{-1}({b}-A{x}^k) \\
+&amp;= A^{-1}{r}^k,\end{split}\]</div>
+</div></blockquote>
 <p>so <span class="math notranslate nohighlight">\(\|e^k\| \leq \|A^{-1}\|\|r^k\|\)</span>.</p>
 <p>The relative error <span class="math notranslate nohighlight">\(\|e^k\|/\|x^*\|\)</span> satisfies</p>
-<div class="math notranslate nohighlight">
+<blockquote>
+<div><div class="math notranslate nohighlight">
 \[\frac{\|e^k\|}{\|x^*\|}
-= \frac{\|A^{-1}r^k\|}{\|x\|}
-\leq \|A^{-1}\|\frac{\|r^k\|}{\|x\|}
+= \frac{\|A^{-1}r^k\|}{\|x^*\|}
+\leq \|A^{-1}\|\frac{\|r^k\|}{\|x^*\|}
 \leq \|A^{-1}\|\|A\|\frac{\|r^k\|}{\|b\|},\]</div>
+</div></blockquote>
 <p>so the relative error is bounded from above by
-the condition number of <span class="math notranslate nohighlight">\(\|A\|\)</span> multiplied by
+the condition number <span class="math notranslate nohighlight">\(\kappa(A)=\|A\|\|A^{-1}\|\)</span> multiplied by
 the relative residual <span class="math notranslate nohighlight">\(\|r^k\|/\|b\|\)</span>. If the condition
 number is large, it is possible to have a small residual
-but still have a large condition number.</p>
-<p>Similar results hold for the pseudoresidual, but are
+but still have a large relative error.</p>
+<p>Similar results hold for the pseudo-residual, but are
 more complicated to show for the case of GMRES.</p>
 </section>
 </section>

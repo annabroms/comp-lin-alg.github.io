@@ -75,7 +75,7 @@ as follows.</p>
 </div></div><p>The word “stationary” refers to the fact that exactly the same thing
 is done at each iteration. This contrasts with Krylov methods such as
 GMRES, where the sequence of operations depends on the previous
-iterations (e.g. a different size least square system is solve in each
+iterations (e.g. a different sized least squares system is solved in each
 GMRES iteration).</p>
 <p>In this section we will introduce/recall some classic stationary
 methods.</p>
@@ -108,7 +108,7 @@ dam</em>. Philos. Trans. Roy. Soc. London Ser. A 210: 307-357.</p>
 <p>Split <span class="math notranslate nohighlight">\(A=L+D+U\)</span> with <span class="math notranslate nohighlight">\(L\)</span> strictly lower triangular, <span class="math notranslate nohighlight">\(D\)</span>
 diagonal and <span class="math notranslate nohighlight">\(U\)</span> strictly upper triangular, i.e.</p>
 <div class="math notranslate nohighlight">
-\[L_{ij}=0, \, j\geq i, \quad D_{ij}=0, \, i\neq j, \quad U_{ij}, \, i\geq j.\]</div>
+\[L_{ij}=0, \, j\geq i, \quad D_{ij}=0, \, i\neq j, \quad U_{ij}=0, \, i\geq j.\]</div>
 <p>Then, Jacobi’s method is</p>
 <div class="math notranslate nohighlight">
 \[D{x}^{k+1} = {b}-(L+U){x}^k.\]</div>
@@ -139,7 +139,7 @@ system by forward/backward substitution.</p>
         <span class="proof-type">Exercise </span>
         
     </div><div class="proof-content">
-<p>Show that forward Gauss-Seidel is a modification Jacobi’s method
+<p>Show that forward Gauss-Seidel is a modification of Jacobi’s method
 but using new values as soon as possible.</p>
 </div></div><div class="proof proof-type-definition" id="id6">
 
@@ -222,7 +222,7 @@ D-U\right){x}^k + {b}, \\
 (U+\frac{1}{\omega}D){x}^{k+1}&amp;=\left(\left(\frac{1}{\omega}-1\right)
 D-L\right){x}^{k+\frac{1}{2}} + {b}.\end{split}\]</div>
 </div></div><p>Some Krylov methods, notably the Conjugate Gradient method, require
-the preconditioner <span class="math notranslate nohighlight">\(\hat{A}\)</span> to be symmetric.
+the preconditioner <span class="math notranslate nohighlight">\(\hat{A}\)</span> to be symmetric positive definite.
 We can build symmetric preconditioners from symmetric splitting methods.
 Write the symmetric iteration as a single step with
 <span class="math notranslate nohighlight">\({x}^0={0}\)</span>.</p>
@@ -301,7 +301,7 @@ between <span class="math notranslate nohighlight">\(M_s\)</span> and <span clas
         
     </div><div class="proof-content">
 <p>An iterative method based on the splitting <span class="math notranslate nohighlight">\(A=M+N\)</span> with iteration
-matrix <span class="math notranslate nohighlight">\(C=-M^{-1}N\)</span> is called {convergent} if</p>
+matrix <span class="math notranslate nohighlight">\(C=-M^{-1}N\)</span> is called <em>convergent</em> if</p>
 <div class="math notranslate nohighlight">
 \[{y}^k = C^k{y}^0 \to {0}\]</div>
 <p>for any initial vector <span class="math notranslate nohighlight">\({y}^0\)</span>.</p>
@@ -366,17 +366,17 @@ of <span class="math notranslate nohighlight">\(C\)</span>:</p>
     </div><div class="proof-content">
 <p>[Proof that <span class="math notranslate nohighlight">\(\rho(C)\geq 1\implies\)</span> non-convergence]</p>
 <p>If <span class="math notranslate nohighlight">\(\rho(C)\geq 1\)</span>, then <span class="math notranslate nohighlight">\(C\)</span> has an eigenvector <span class="math notranslate nohighlight">\({v}\)</span> with
-<span class="math notranslate nohighlight">\(\|{v}\|_2=1\)</span> and eigenvalue <span class="math notranslate nohighlight">\(\lambda\)</span> with <span class="math notranslate nohighlight">\(|\lambda|&gt;1\)</span>. Then</p>
+<span class="math notranslate nohighlight">\(\|{v}\|_2=1\)</span> and eigenvalue <span class="math notranslate nohighlight">\(\lambda\)</span> with <span class="math notranslate nohighlight">\(|\lambda|\geq 1\)</span>. Then</p>
 <div class="math notranslate nohighlight">
 \[\|C^k{v}\|_2 = \|\lambda^k{v}\|_2 = |\lambda|^k\|{v}\|_2\geq 1,\]</div>
 <p>which does not converge to zero.</p>
-<p>[Proof that <span class="math notranslate nohighlight">\(\rho(C)&lt; 1\implies\)</span> convergence]</p>
-<p>Assume a linearly independent eigenvalue expansion (not necessary
-for the proof but it simplifies things a lot)
+<p>[Proof that <span class="math notranslate nohighlight">\(\rho(C)&lt; 1\implies\)</span> convergence in the diagonalizable case]</p>
+<p>For this simplified proof, assume that <span class="math notranslate nohighlight">\(C\)</span> has a basis of eigenvectors,
+so that any vector can be expanded as
 <span class="math notranslate nohighlight">\({z} = \sum_{i=1}^n\alpha_i{v}_i\)</span>. Then,</p>
 <div class="math notranslate nohighlight">
 \[C^k{z} = \sum_{i=1}^n\alpha_iC^k{v}_i
-= \sum_{i=1}^n\alpha_i\lambda^k{v}_i\to 0.\]</div>
+= \sum_{i=1}^n\alpha_i\lambda_i^k{v}_i\to 0.\]</div>
 </div></div><ul class="simple">
 <li><p>For symmetric matrices <span class="math notranslate nohighlight">\(B\)</span>, <span class="math notranslate nohighlight">\(\rho(B)=\|B\|_2\)</span>, so</p></li>
 </ul>
@@ -404,7 +404,7 @@ then the error may not converge monotonically.</p>
 <div class="math notranslate nohighlight">
 \[\left(\frac{1}{\omega}D+L\right){x}^{k+1} =
 {b}+\left(\left(\frac{1}{\omega}-1\right)D-U\right){x}^k\]</div>
-<p>What values of <span class="math notranslate nohighlight">\(\omega\)</span>? For SOR,iteration matrix <span class="math notranslate nohighlight">\(C\)</span> is</p>
+<p>What values of <span class="math notranslate nohighlight">\(\omega\)</span>? For SOR, the iteration matrix <span class="math notranslate nohighlight">\(C\)</span> is</p>
 <div class="math notranslate nohighlight">
 \[C = \left(\frac{1}{\omega}D+L\right)^{-1}
 \left(\frac{1-\omega}{\omega}D-U\right) = (D+\omega L)^{-1}
@@ -425,8 +425,9 @@ requires <span class="math notranslate nohighlight">\(|1-\omega|&lt;1\)</span>.<
 </div></div></section>
 <section id="splitting-methods-as-preconditioners">
 <h2><span class="section-number">7.5. </span>Splitting methods as preconditioners<a class="headerlink" href="#splitting-methods-as-preconditioners" title="Link to this heading">¶</a></h2>
-<p>Recall that preconditioned GMRES converges well if the eigenvalues
-of <span class="math notranslate nohighlight">\(\hat{A}^{-1}A\)</span> are clustered together.</p>
+<p>Clustering the eigenvalues of <span class="math notranslate nohighlight">\(\hat{A}^{-1}A\)</span> away from zero can help
+preconditioned GMRES converge quickly. For general nonsymmetric matrices,
+eigenvalues alone do not determine the convergence rate.</p>
 <div class="proof proof-type-theorem" id="id17">
 
     <div class="proof-title">
@@ -448,10 +449,12 @@ of <span class="math notranslate nohighlight">\(\hat{A}^{-1}A\)</span> are clust
 <p>Then,</p>
 <div class="math notranslate nohighlight">
 \[1&gt;c&gt;\rho(C)=\rho(I-M^{-1}A),\]</div>
-<p>and the result follows since <span class="math notranslate nohighlight">\(I\)</span> and <span class="math notranslate nohighlight">\(M^{-1}A\)</span> have a simultaneous
-eigendecomposition.</p>
-</div></div><p>We deduce that good convergence of the GMRES algorithm occurs when <span class="math notranslate nohighlight">\(c\)</span>
-is small.</p>
+<p>and the result follows since <span class="math notranslate nohighlight">\(M^{-1}Av=\lambda v\)</span> implies
+<span class="math notranslate nohighlight">\(Cv=(1-\lambda)v\)</span>, so <span class="math notranslate nohighlight">\(|1-\lambda|&lt;c\)</span>.</p>
+</div></div><p>A small <span class="math notranslate nohighlight">\(c\)</span> gives a tight eigenvalue cluster around <span class="math notranslate nohighlight">\(1\)</span>. For a
+diagonalizable preconditioned matrix, the GMRES convergence bound also
+depends on the conditioning of its eigenvector matrix; a small <span class="math notranslate nohighlight">\(c\)</span>
+alone does not guarantee fast convergence.</p>
 <p>For symmetric splittings, we have already observed that the iteration
 matrix is</p>
 <div class="math notranslate nohighlight">
@@ -466,7 +469,7 @@ matrix is</p>
         <span class="proof-type">Theorem </span>
         
     </div><div class="proof-content">
-<p>Let <span class="math notranslate nohighlight">\(A\)</span> be a matrix with splitting
+<p>Let <span class="math notranslate nohighlight">\(A\)</span> be a symmetric matrix with splitting
 <span class="math notranslate nohighlight">\(M+N\)</span>, such that the symmetric splitting has iteration matrix</p>
 <div class="math notranslate nohighlight">
 \[\rho(C) = c &lt; 1,\]</div>
@@ -486,7 +489,7 @@ matrix is</p>
 <p>so <span class="math notranslate nohighlight">\(\rho(I- \hat{A}^{-1}A) = \rho(C) = c\)</span>. Further, <span class="math notranslate nohighlight">\(M_s\)</span> is
 symmetric and positive definite, so there exists a unique symmetric
 positive definite matrix square root <span class="math notranslate nohighlight">\(S\)</span> such that <span class="math notranslate nohighlight">\(SS =
-M_s\)</span>. Then,</p>
+M_s^{-1}\)</span>. Then,</p>
 <div class="math notranslate nohighlight">
 \[M_s^{-1}A = SSA = S(SAS)S^{-1}.\]</div>
 <p>Thus, <span class="math notranslate nohighlight">\(M_s^{-1}A\)</span> is similar to (and therefore has the same eigenvalues as)
@@ -529,7 +532,7 @@ matrix has spectral radius</p>
 Rayleigh Quotient formula,</p>
 <div class="math notranslate nohighlight">
 \[\lambda_{\max}=\max_{{x}\ne
- 0}\frac{{x}^TA{x}}{{x}^T{x}}\equiv \|A\|_2^2, \quad
+ 0}\frac{{x}^TA{x}}{{x}^T{x}}\equiv \|A\|_2, \quad
 \lambda_{\min}=\min_{{x}\ne
  0}\frac{{x}^TA{x}}{{x}^T{x}},\]</div>
 <p>implying that</p>
@@ -587,7 +590,7 @@ positive definite then</p>
 \hat{\mu}_{\min}\|{x}\|^2_A,\end{split}\]</div>
 <p>where <span class="math notranslate nohighlight">\(\hat{\mu}_{\min}\)</span> is the minimum eigenvalue of
 <span class="math notranslate nohighlight">\(A^{1/2}\left(M^{-1}\right)^TM^{-1}A^{1/2}\)</span> i.e.  the square
-of the minimum eigenvalue of <span class="math notranslate nohighlight">\(M^{-1}A^{1/2}\)</span>, which is invertible so
+of the smallest singular value of <span class="math notranslate nohighlight">\(M^{-1}A^{1/2}\)</span>, which is invertible so
 <span class="math notranslate nohighlight">\(\hat{\mu}_{\min}&gt;0\)</span>. If <span class="math notranslate nohighlight">\({y}=(I-M^{-1}A){x}\)</span>,
 <span class="math notranslate nohighlight">\({w}=M^{-1}A{x}\)</span>, then</p>
 <div class="math notranslate nohighlight">
@@ -625,7 +628,7 @@ Hence,</p>
 </div></div><p>The consequence of this is that if <span class="math notranslate nohighlight">\(M+M^T-A\)</span> is symmetric
 positive definite then there is a guaranteed reduction in the <span class="math notranslate nohighlight">\(A\)</span>-norm
 of the error in each iteration. If <span class="math notranslate nohighlight">\(M\)</span> is also symmetric
-positive definite the there is guaranteed reduction in the <span class="math notranslate nohighlight">\(M\)</span>-norm of
+positive definite then there is guaranteed reduction in the <span class="math notranslate nohighlight">\(M\)</span>-norm of
 the error in each iteration.</p>
 <p>Now we apply this to the convergence of Jacobi iteration.  In this
 case <span class="math notranslate nohighlight">\(M=D\)</span>, so <span class="math notranslate nohighlight">\(M^T+M-A=2D-A\)</span> which may not be positive definite.
@@ -637,7 +640,7 @@ We generalise to scaled Jacobi iteration with <span class="math notranslate nohi
         
     </div><div class="proof-content">
 <p>Let <span class="math notranslate nohighlight">\(A\)</span> be a symmetric positive definite matrix. Let <span class="math notranslate nohighlight">\(\lambda\)</span> be
-the (real) maximum eigenvalue of <span class="math notranslate nohighlight">\(D^{-1/2}AD^{-1/2}\)</span>.  If <span class="math notranslate nohighlight">\(\omega &lt;
+the (real) maximum eigenvalue of <span class="math notranslate nohighlight">\(D^{-1/2}AD^{-1/2}\)</span>.  If <span class="math notranslate nohighlight">\(0&lt;\omega &lt;
 2/\lambda\)</span> then scaled Jacobi iteration converges.</p>
 </div></div><div class="proof proof-type-proof">
 
@@ -687,7 +690,7 @@ iteration always converges.</p>
         
     </div><div class="proof-content">
 <p>Let <span class="math notranslate nohighlight">\(A\)</span> be a symmetric positive definite matrix. Then SOR converges
-provided that <span class="math notranslate nohighlight">\(0&lt;\omega 2\)</span>.</p>
+provided that <span class="math notranslate nohighlight">\(0&lt;\omega&lt;2\)</span>.</p>
 </div></div><div class="proof proof-type-proof">
 
     <div class="proof-title">
@@ -703,8 +706,8 @@ provided that <span class="math notranslate nohighlight">\(0&lt;\omega 2\)</span
 <p>which is symmetric positive definite provided that
 <span class="math notranslate nohighlight">\(0&lt;\omega&lt;2\)</span>.</p>
 </div></div></section>
-<section id="an-example-matrix-non-examinable-in-2024-25">
-<h2><span class="section-number">7.8. </span>An example matrix (Non-examinable in 2024/25)<a class="headerlink" href="#an-example-matrix-non-examinable-in-2024-25" title="Link to this heading">¶</a></h2>
+<section id="an-example-matrix">
+<h2><span class="section-number">7.8. </span>An example matrix<a class="headerlink" href="#an-example-matrix" title="Link to this heading">¶</a></h2>
 <p>We consider stationary methods for an example arising from the
 finite difference discretisation of the two point boundary value
 problem</p>
@@ -717,7 +720,7 @@ just have to find <span class="math notranslate nohighlight">\(u_k\)</span> with
 finite difference approximation</p>
 <div class="math notranslate nohighlight">
 \[-u_{k-1} + 2u_k - u_{k+1} = f_k, \quad 1\leq k \leq n,\]</div>
-<p>where <span class="math notranslate nohighlight">\(f_k=f(k/n)/n^2\)</span>, <span class="math notranslate nohighlight">\(1\leq k\leq n\)</span>. Taking into account the
+<p>where <span class="math notranslate nohighlight">\(f_k=f(k/(n+1))/(n+1)^2\)</span>, <span class="math notranslate nohighlight">\(1\leq k\leq n\)</span>. Taking into account the
 boundary conditions <span class="math notranslate nohighlight">\(u_0=u_{n+1}=0\)</span>, we can write this as a matrix
 system <span class="math notranslate nohighlight">\(Ax=b\)</span> with</p>
 <div class="math notranslate nohighlight">
@@ -771,13 +774,15 @@ are all of the form</p>
 \begin{pmatrix}
 \sin(l\pi/(n+1)) \\
 \sin(2l\pi/(n+1)) \\
+\vdots \\
 \sin(nl\pi/(n+1)) \\
 \end{pmatrix}
 \right),\end{split}\]</div>
 <p>with one eigenvector for each value of <span class="math notranslate nohighlight">\(0&lt; l &lt;n+1\)</span>. This can be proved
 by considering symmetries of the matrix, but here we just assume this
 form and establish that we have eigenvectors after substituting into the
-definition of an eigenvector <span class="math notranslate nohighlight">\(Av=\lambda v\)</span>. This is a general approach
+general eigenvector relation <span class="math notranslate nohighlight">\(Bv=\lambda v\)</span>, here with <span class="math notranslate nohighlight">\(B=D^{-1}A\)</span>.
+This is a general approach
 that can be tried for any matrices arising in the analysis of convergence
 of classic stationary methods for this example matrix.</p>
 <div class="math notranslate nohighlight">
@@ -786,22 +791,22 @@ of classic stationary methods for this example matrix.</p>
 \lambda u_k\]</div>
 <p>which becomes</p>
 <div class="math notranslate nohighlight">
-\[\lambda\sin(kl\pi/(n+1)) = -\sin((l-1)k\pi/(n+1))/2 + \sin(kl\pi/(n+1)) - \sin((l+1)k\pi/(n+1))/2,\]</div>
+\[\lambda\sin(kl\pi/(n+1)) = -\sin((k-1)l\pi/(n+1))/2 + \sin(kl\pi/(n+1)) - \sin((k+1)l\pi/(n+1))/2,\]</div>
 <p>and you can use trigonometric formulae, or write</p>
 <div class="math notranslate nohighlight">
-\[\begin{split}\lambda\sin(kl\pi/(n+1) &amp; =
--\sin((l-1)k\pi/(n+1))/2 + \sin(lk\pi/(n+1)) - \sin((l+1)k\pi/(n+1))/2\\
-&amp; = \sin(kl\pi/(n+1)) - \Im\left(\exp(ik(l-1)\pi/(n+1)) + \exp(ik(l+1)\pi/(n+1))\right)/2 \\
+\[\begin{split}\lambda\sin(kl\pi/(n+1)) &amp; =
+-\sin((k-1)l\pi/(n+1))/2 + \sin(lk\pi/(n+1)) - \sin((k+1)l\pi/(n+1))/2\\
+&amp; = \sin(kl\pi/(n+1)) - \Im\left(\exp(il(k-1)\pi/(n+1)) + \exp(il(k+1)\pi/(n+1))\right)/2 \\
 &amp; = \sin(kl\pi/(n+1)) - \Im\left(\left(
-\exp(-ik\pi/(n+1)) + \exp(ik\pi/(n+1))\right)\exp(ikl\pi/(n+1))\right)/2 \\
-&amp; = \sin(kl\pi/(n+1)) - \Im\left(\sin(k\pi/(n+1))\exp(ikl\pi/(n+1))\right) \\
-&amp; = \sin(kl\pi/(n+1))(1 - \sin(k\pi/(n+1)))\end{split}\]</div>
-</div></div><p>and we conclude that <span class="math notranslate nohighlight">\(\lambda=1-\sin(k\pi/(n+1))\)</span> are the eigenvalues
-with <span class="math notranslate nohighlight">\(0&lt;k&lt;n+1\)</span>. The maximum eigenvalue corresponds to <span class="math notranslate nohighlight">\(k=1\)</span> and <span class="math notranslate nohighlight">\(k=n\)</span>,
-with <span class="math notranslate nohighlight">\(\lambda=1-\sin(\pi/(n+1))\)</span>.</p>
+\exp(-il\pi/(n+1)) + \exp(il\pi/(n+1))\right)\exp(ikl\pi/(n+1))\right)/2 \\
+&amp; = \sin(kl\pi/(n+1)) - \Im\left(\cos(l\pi/(n+1))\exp(ikl\pi/(n+1))\right) \\
+&amp; = \sin(kl\pi/(n+1))(1 - \cos(l\pi/(n+1)))\end{split}\]</div>
+</div></div><p>and we conclude that <span class="math notranslate nohighlight">\(\lambda=1-\cos(l\pi/(n+1))\)</span> are the eigenvalues
+with <span class="math notranslate nohighlight">\(0&lt;l&lt;n+1\)</span>. The maximum eigenvalue corresponds to <span class="math notranslate nohighlight">\(l=n\)</span>,
+with <span class="math notranslate nohighlight">\(\lambda=1+\cos(\pi/(n+1))\)</span>.</p>
 <p>The condition <span class="math notranslate nohighlight">\(\omega&lt;2/\lambda\)</span> thus requires that</p>
 <div class="math notranslate nohighlight">
-\[\omega &lt; \frac{2}{1-\sin(\pi/(n+1))}.\]</div>
+\[\omega &lt; \frac{2}{1+\cos(\pi/(n+1))}.\]</div>
 <div class="proof proof-type-exercise" id="id26">
 
     <div class="proof-title">
@@ -813,8 +818,8 @@ for scaled Jacobi such that the convergence rate is maximised,
 i.e. so that <span class="math notranslate nohighlight">\(\rho(C)\)</span> is minimised. What happens to this rate
 as <span class="math notranslate nohighlight">\(n\to \infty\)</span>?</p>
 </div></div></section>
-<section id="chebyshev-acceleration-examinable-in-2024-25">
-<h2><span class="section-number">7.9. </span>Chebyshev acceleration (examinable in 2024/25)<a class="headerlink" href="#chebyshev-acceleration-examinable-in-2024-25" title="Link to this heading">¶</a></h2>
+<section id="chebyshev-acceleration">
+<h2><span class="section-number">7.9. </span>Chebyshev acceleration<a class="headerlink" href="#chebyshev-acceleration" title="Link to this heading">¶</a></h2>
 <p>Say we have computed iterates <span class="math notranslate nohighlight">\({x}^0,{x}^1,\ldots,{x}^k\)</span> using</p>
 <div class="math notranslate nohighlight">
 \[M{x}^{k+1} = -N{x}^k + {b}.\]</div>
@@ -822,7 +827,7 @@ as <span class="math notranslate nohighlight">\(n\to \infty\)</span>?</p>
 solution. Can we use extrapolation through these iterates to obtain a
 better guess for the solution?</p>
 <div class="math notranslate nohighlight">
-\[\mbox{Find}\,c_{jk},\,j=1,\ldots,k,\,\mbox{with}\,
+\[\mbox{Find}\,c_{jk},\,j=0,\ldots,k,\,\mbox{with}\,
 {y}^k = \sum_{j=0}^kc_{jk}{x}^j,\]</div>
 <p>with <span class="math notranslate nohighlight">\({y}^k\)</span> the best possible approximation to <span class="math notranslate nohighlight">\({x}^*\)</span>.</p>
 <p>The usual iterative method has <span class="math notranslate nohighlight">\(c_{kk}=1\)</span>, and <span class="math notranslate nohighlight">\(c_{jk}=0\)</span> for <span class="math notranslate nohighlight">\(j&lt;k\)</span>.
@@ -844,16 +849,16 @@ by writing</p>
 <p>where</p>
 <div class="math notranslate nohighlight">
 \[p_k(X) = c_{0k} + c_{1k}X + c_{2k}X^2 + \ldots + c_{kk}X^k,\]</div>
-<p>with <span class="math notranslate nohighlight">\(p_k(1)=1\)</span> (from our condition <span class="math notranslate nohighlight">\(\sum_{j=0}^kc_{jk}=1)\)</span>.</p>
+<p>with <span class="math notranslate nohighlight">\(p_k(1)=1\)</span> (from our condition <span class="math notranslate nohighlight">\(\sum_{j=0}^kc_{jk}=1\)</span>).</p>
 <p>We want to try to minimise <span class="math notranslate nohighlight">\({y}^k-{x}^*\)</span> by choosing <span class="math notranslate nohighlight">\(c_{0k}\)</span>,
-<span class="math notranslate nohighlight">\(c_{1k}\)</span>, <span class="math notranslate nohighlight">\(\ldots\)</span>, <span class="math notranslate nohighlight">\(c_{kk}\)</span> so that the eigenvalues of <span class="math notranslate nohighlight">\(p_k\)</span> are as
+<span class="math notranslate nohighlight">\(c_{1k}\)</span>, <span class="math notranslate nohighlight">\(\ldots\)</span>, <span class="math notranslate nohighlight">\(c_{kk}\)</span> so that the eigenvalues of <span class="math notranslate nohighlight">\(p_k(C)\)</span> are as
 small as possible.  If <span class="math notranslate nohighlight">\(\lambda\)</span> is an eigenvalue of <span class="math notranslate nohighlight">\(C=-M^{-1}N\)</span>,
 then <span class="math notranslate nohighlight">\(p_k(\lambda)\)</span> is an eigenvalue of <span class="math notranslate nohighlight">\(p_k(C)\)</span>.  It is not practical
 to know all the eigenvalues of a large matrix, so we will develop
 methods that work if we know that all eigenvalues of <span class="math notranslate nohighlight">\(C\)</span> are real, and
 satisfy <span class="math notranslate nohighlight">\(-1&lt;\alpha&lt;\lambda&lt;\beta&lt;1\)</span>, for some constants <span class="math notranslate nohighlight">\(\alpha\)</span>
 and <span class="math notranslate nohighlight">\(\beta\)</span> (we know that <span class="math notranslate nohighlight">\(|\lambda|&lt;1\)</span> otherwise the basic method is
-not convergent.</p>
+not convergent).</p>
 <p>If all eigenvalues of <span class="math notranslate nohighlight">\(C\)</span> are real, and satisfy
 <span class="math notranslate nohighlight">\(-1&lt;\alpha&lt;\lambda&lt;\beta&lt;1\)</span>,
 then we try to make <span class="math notranslate nohighlight">\(\rho_{\max} = \max_{\alpha\leq t\leq\beta}|p_k(t)|\)</span>
@@ -888,7 +893,7 @@ maximum value is <span class="math notranslate nohighlight">\(1\)</span>.</p>
 \[T_k\left(\frac{2t-\beta-\alpha}{\beta-\alpha}\right)\quad\mbox{minimises}
 \quad \max_{\alpha\leq t\leq \beta}|p_k(t)|\]</div>
 <p>subject to the constraint that the coefficient of <span class="math notranslate nohighlight">\(t^k\)</span> is
-<span class="math notranslate nohighlight">\(2^{2k-1}/(\beta-\alpha)\)</span>.
+<span class="math notranslate nohighlight">\(2^{2k-1}/(\beta-\alpha)^k\)</span>.
 The maximum value is <span class="math notranslate nohighlight">\(1\)</span>.</p>
 <p>Then we scale the polynomial to reach the condition <span class="math notranslate nohighlight">\(p_k(1)=1\)</span>.</p>
 <div class="math notranslate nohighlight">
@@ -912,7 +917,7 @@ The maximum value is</p>
 \[p_k(t) = c_{0k} + c_{1k}t + c_{2k}t^2 + \ldots + c_{kk}t^k,\]</div>
 <p>then</p>
 <div class="math notranslate nohighlight">
-\[{y}^k = \sum_{j=0}^kc_{jk}{x}^k.\]</div>
+\[{y}^k = \sum_{j=0}^kc_{jk}{x}^j.\]</div>
 <p>There appears to be a practical problem: we need to store <span class="math notranslate nohighlight">\({x}^0\)</span>,
 <span class="math notranslate nohighlight">\({x}^1\)</span>, <span class="math notranslate nohighlight">\(\ldots\)</span>, <span class="math notranslate nohighlight">\({x}^k\)</span> in order to calculate <span class="math notranslate nohighlight">\({y}^k\)</span>. However,
 we can get a formula for <span class="math notranslate nohighlight">\({y}^k\)</span> in terms of <span class="math notranslate nohighlight">\({y}^{k-1}\)</span> and
@@ -932,7 +937,7 @@ we can get a formula for <span class="math notranslate nohighlight">\({y}^k\)</s
 <p>where</p>
 <div class="math notranslate nohighlight">
 \[\gamma=\frac{2}{2-\beta-\alpha}, \quad M{z}^{k-1}={b}-A{y}^{k-1}.\]</div>
-<p>with starting formulas</p>
+<p>With starting formulas</p>
 <div class="math notranslate nohighlight">
 \[\begin{split}{y}^0 &amp; =  {x}^0 \\
 {y}^1 &amp; =  {x}^0 + \gamma M^{-1}({b}-A{x}^0).\end{split}\]</div>

@@ -13,6 +13,7 @@
     <script src="_static/doctools.js?v=9bcbadda"></script>
     <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="_static/proof.js"></script>
+    <script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@2/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
     <link rel="next" title="1. Getting ready for computational exercises" href="L0_setup.html" />
@@ -50,6 +51,82 @@
 <p>Here we’ll list all the updates to the exercises and coursework Classroom
 repositories for Autumn 2026. An up to date version is in the
 <a class="reference external" href="https://github.com/comp-lin-alg/comp-lin-alg-course">public repository</a>.</p>
+<ul class="simple">
+<li><p>In <a class="reference internal" href="L6_krylov.html"><span class="doc">Iterative Krylov methods for Ax=b</span></a>, the last column of the Krylov matrix <span class="math notranslate nohighlight">\(K_n\)</span>
+should be <span class="math notranslate nohighlight">\(A^{n-1}b\)</span>, rather than <span class="math notranslate nohighlight">\(A^{n_1}b\)</span>.</p></li>
+<li><p>In <a class="reference internal" href="L6_krylov.html"><span class="doc">Iterative Krylov methods for Ax=b</span></a>, the orthogonal projection of <span class="math notranslate nohighlight">\(Av\)</span> onto the
+Krylov subspace is <span class="math notranslate nohighlight">\(PAv=\hat{Q}_n\hat{Q}_n^*Av\)</span>; the <span class="math notranslate nohighlight">\(A\)</span> was
+missing on the right-hand side.</p></li>
+<li><p>In <a class="reference internal" href="L6_krylov.html"><span class="doc">Iterative Krylov methods for Ax=b</span></a>, in the exercise on recycling the QR
+factorisation in GMRES, the least squares matrix is <span class="math notranslate nohighlight">\(\tilde{H}_k\)</span>
+rather than <span class="math notranslate nohighlight">\(H_k\)</span> (and <span class="math notranslate nohighlight">\(\tilde{H}_{k-1}\)</span> rather than <span class="math notranslate nohighlight">\(H_{k-1}\)</span>).
+Householder transformations are reflections, not rotations.</p></li>
+<li><p>In <a class="reference internal" href="L6_krylov.html"><span class="doc">Iterative Krylov methods for Ax=b</span></a>, in the GMRES convergence bound,
+<span class="math notranslate nohighlight">\(p_n(A)=Vp_n(\Lambda)V^{-1}\)</span>, rather than <span class="math notranslate nohighlight">\(Vp_n(\Lambda^s)V^{-1}\)</span>.</p></li>
+<li><p>In <a class="reference internal" href="L6_krylov.html"><span class="doc">Iterative Krylov methods for Ax=b</span></a>, in “Knowing when to stop”, invertibility of
+<span class="math notranslate nohighlight">\(A\)</span> is not needed for the residual and pseudo-residual to tend to
+zero as <span class="math notranslate nohighlight">\(x^k\to x^*\)</span>; it is needed for the converse, that a small
+residual implies a small error.</p></li>
+<li><p>In <a class="reference internal" href="L6_krylov.html"><span class="doc">Iterative Krylov methods for Ax=b</span></a>, in the bound on the relative error, the
+denominators should be <span class="math notranslate nohighlight">\(\|x^*\|\)</span> rather than <span class="math notranslate nohighlight">\(\|x\|\)</span>.</p></li>
+<li><p>In <a class="reference internal" href="L6_krylov.html"><span class="doc">Iterative Krylov methods for Ax=b</span></a>, in “Knowing when to stop”, the relative
+error is bounded by the condition number of <span class="math notranslate nohighlight">\(A\)</span> (not of <span class="math notranslate nohighlight">\(\|A\|\)</span>)
+times the relative residual; if the condition number is large, a
+small residual can coexist with a large relative error (not a
+large condition number).</p></li>
+<li><p>In <a class="reference internal" href="L7_preconditioning.html"><span class="doc">Preconditioning Krylov methods</span></a>, in the proof that a stationary method
+does not converge when <span class="math notranslate nohighlight">\(\rho(C)\geq 1\)</span>, the eigenvalue condition
+<span class="math notranslate nohighlight">\(|\lambda|&gt;1\)</span> should be <span class="math notranslate nohighlight">\(|\lambda|\geq 1\)</span>, to include the case
+<span class="math notranslate nohighlight">\(\rho(C)=1\)</span>.</p></li>
+<li><p>In <a class="reference internal" href="L7_preconditioning.html"><span class="doc">Preconditioning Krylov methods</span></a>, in the proof that <span class="math notranslate nohighlight">\(\rho(C)&lt;1\)</span> implies
+convergence, <span class="math notranslate nohighlight">\(\lambda^k\)</span> in the eigenvector expansion should be
+<span class="math notranslate nohighlight">\(\lambda_i^k\)</span>.</p></li>
+<li><p>In <a class="reference internal" href="L7_preconditioning.html"><span class="doc">Preconditioning Krylov methods</span></a>, in the proof that the eigenvalues of
+the symmetrically preconditioned matrix lie in <span class="math notranslate nohighlight">\([1-c,1+c]\)</span>, the
+square root <span class="math notranslate nohighlight">\(S\)</span> should satisfy <span class="math notranslate nohighlight">\(SS=M_s^{-1}\)</span>, rather than <span class="math notranslate nohighlight">\(SS=M_s\)</span>.</p></li>
+<li><p>In <a class="reference internal" href="L7_preconditioning.html"><span class="doc">Preconditioning Krylov methods</span></a>, the SOR convergence condition
+<span class="math notranslate nohighlight">\(0&lt;\omega 2\)</span> should be <span class="math notranslate nohighlight">\(0&lt;\omega&lt;2\)</span>.</p></li>
+<li><p>In <a class="reference internal" href="L7_preconditioning.html"><span class="doc">Preconditioning Krylov methods</span></a>, in the finite difference example,
+<span class="math notranslate nohighlight">\(f_k=f(k/n)/n^2\)</span> should be <span class="math notranslate nohighlight">\(f_k=f(k/(n+1))/(n+1)^2\)</span>, consistent
+with the grid spacing <span class="math notranslate nohighlight">\(h=1/(n+1)\)</span>.</p></li>
+<li><p>In <a class="reference internal" href="L7_preconditioning.html"><span class="doc">Preconditioning Krylov methods</span></a>, the example “Jacobi iteration for the
+example matrix” contained swapped spatial and eigenvector indices
+and used sine instead of cosine when combining exponentials.
+The corrected eigenvalues of <span class="math notranslate nohighlight">\(D^{-1}A\)</span> are
+<span class="math notranslate nohighlight">\(\lambda_l=1-\cos(l\pi/(n+1))\)</span>, for <span class="math notranslate nohighlight">\(l=1,\ldots,n\)</span>.
+Hence the maximum is <span class="math notranslate nohighlight">\(1+\cos(\pi/(n+1))\)</span>, attained at <span class="math notranslate nohighlight">\(l=n\)</span>,
+and the upper bound for the scaled Jacobi parameter is
+<span class="math notranslate nohighlight">\(\omega&lt;2/(1+\cos(\pi/(n+1)))\)</span>.</p></li>
+<li><p>In <a class="reference internal" href="L7_preconditioning.html"><span class="doc">Preconditioning Krylov methods</span></a>, in the introduction to Chebyshev
+acceleration, the coefficients <span class="math notranslate nohighlight">\(c_{jk}\)</span> should be sought for
+<span class="math notranslate nohighlight">\(j=0,\ldots,k\)</span>, including the coefficient of the initial guess <span class="math notranslate nohighlight">\(x^0\)</span>.
+The eigenvalues to be made small are those of the matrix <span class="math notranslate nohighlight">\(p_k(C)\)</span>,
+rather than of the polynomial <span class="math notranslate nohighlight">\(p_k\)</span> itself.
+After changing variables to the interval <span class="math notranslate nohighlight">\([\alpha,\beta]\)</span>, the
+leading coefficient is <span class="math notranslate nohighlight">\(2^{2k-1}/(\beta-\alpha)^k\)</span>, rather than
+<span class="math notranslate nohighlight">\(2^{2k-1}/(\beta-\alpha)\)</span>.
+The accelerated iterate is <span class="math notranslate nohighlight">\(y^k=\sum_{j=0}^kc_{jk}x^j\)</span>, rather
+than a sum with <span class="math notranslate nohighlight">\(x^k\)</span> in every term.</p></li>
+<li><p>In <a class="reference internal" href="L7_preconditioning.html"><span class="doc">Preconditioning Krylov methods</span></a>, in the commented-out “Accelerated
+Jacobi’s method” block, the iteration matrix is
+<span class="math notranslate nohighlight">\(-M^{-1}N=I-D^{-1}A\)</span>; the minus sign was missing.
+Also, if <span class="math notranslate nohighlight">\(\lambda\)</span> is an eigenvalue of <span class="math notranslate nohighlight">\(I-D^{-1}A\)</span>, then
+<span class="math notranslate nohighlight">\(1-\lambda\)</span> is an eigenvalue of <span class="math notranslate nohighlight">\(D^{-1}A\)</span>, rather than <span class="math notranslate nohighlight">\(D^{-1}\)</span>.</p></li>
+<li><p>In <a class="reference internal" href="L7_preconditioning.html"><span class="doc">Preconditioning Krylov methods</span></a>, the symmetric convergence analysis
+should use <span class="math notranslate nohighlight">\(\lambda_{\max}=\|A\|_2\)</span>, rather than <span class="math notranslate nohighlight">\(\|A\|_2^2\)</span>.
+The positivity argument for <span class="math notranslate nohighlight">\(\hat{\mu}_{\min}\)</span> uses the square of
+the smallest singular value of <span class="math notranslate nohighlight">\(M^{-1}A^{1/2}\)</span>, rather than its
+minimum eigenvalue.</p></li>
+<li><p>In <a class="reference internal" href="L7_preconditioning.html"><span class="doc">Preconditioning Krylov methods</span></a>, the CG preconditioner must be symmetric
+positive definite. The theorem placing the preconditioned eigenvalues
+in <span class="math notranslate nohighlight">\([1-c,1+c]\)</span> also assumes that <span class="math notranslate nohighlight">\(A\)</span> is symmetric.</p></li>
+<li><p>In <a class="reference internal" href="L7_preconditioning.html"><span class="doc">Preconditioning Krylov methods</span></a>, the eigenvalue clustering proof uses
+the relation <span class="math notranslate nohighlight">\(Cv=(1-\lambda)v\)</span>, without assuming an eigendecomposition.
+Eigenvalue clustering alone does not guarantee fast GMRES convergence;
+for diagonalizable matrices, eigenvector conditioning also enters
+the convergence bound. The simplified proof of stationary convergence
+when <span class="math notranslate nohighlight">\(\rho(C)&lt;1\)</span> covers the diagonalizable case.</p></li>
+</ul>
 </section>
 
 
