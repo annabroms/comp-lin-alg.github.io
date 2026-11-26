@@ -51,11 +51,66 @@
 <p>Here we’ll list all the updates to the exercises and coursework Classroom
 repositories for Autumn 2026. An up to date version is in the
 <a class="reference external" href="https://github.com/comp-lin-alg/comp-lin-alg-course">public repository</a>.</p>
+<section id="chapter-2-linear-algebra-preliminaries">
+<h2>Chapter 2: Linear algebra preliminaries<a class="headerlink" href="#chapter-2-linear-algebra-preliminaries" title="Link to this heading">¶</a></h2>
+<ul class="simple">
+<li><p>In <a class="reference internal" href="L1_preliminaries.html"><span class="doc">Linear algebra preliminaries</span></a>, the exercise on solving <span class="math notranslate nohighlight">\(Qx=b\)</span> referred
+to <code class="docutils literal notranslate"><span class="pre">solveQ</span></code>; the function is <code class="xref py py-func docutils literal notranslate"><span class="pre">cla_utils.exercises2.solve_Q()</span></code>.</p></li>
+<li><p>In <code class="docutils literal notranslate"><span class="pre">cla_utils/exercises1.py</span></code>, the docstrings of <code class="docutils literal notranslate"><span class="pre">rank1pert_inv</span></code>
+and <code class="docutils literal notranslate"><span class="pre">ABiC</span></code> now document the return value and the <code class="docutils literal notranslate"><span class="pre">xr</span></code>, <code class="docutils literal notranslate"><span class="pre">xi</span></code>
+arguments, respectively.</p></li>
+<li><p>In <code class="docutils literal notranslate"><span class="pre">cla_utils/exercises2.py</span></code>, the docstring of <code class="docutils literal notranslate"><span class="pre">orthog_proj</span></code> no
+longer mentions an input vector <code class="docutils literal notranslate"><span class="pre">v</span></code>, which is not an argument.</p></li>
+</ul>
+</section>
 <section id="chapter-3-qr-factorisation">
 <h2>Chapter 3: QR factorisation<a class="headerlink" href="#chapter-3-qr-factorisation" title="Link to this heading">¶</a></h2>
 <ul class="simple">
+<li><p>In <a class="reference internal" href="L2_QR_factorisation.html"><span class="doc">QR factorisation</span></a>, in the motivation of the classical
+Gram-Schmidt algorithm, the first column of <span class="math notranslate nohighlight">\(Q\)</span> is proportional to
+the first column of <span class="math notranslate nohighlight">\(A\)</span>, and the third column (not row) of <span class="math notranslate nohighlight">\(Q\)</span> is
+the third column of <span class="math notranslate nohighlight">\(A\)</span> with the first two columns of <span class="math notranslate nohighlight">\(Q\)</span> projected
+out.</p></li>
+<li><p>In <a class="reference internal" href="L2_QR_factorisation.html"><span class="doc">QR factorisation</span></a>, modified Gram-Schmidt transforms <span class="math notranslate nohighlight">\(A\)</span>
+to <span class="math notranslate nohighlight">\(\hat{Q}\)</span>, which has orthonormal columns (and is unitary only if
+<span class="math notranslate nohighlight">\(m=n\)</span>); an arrow was missing in the displayed sequence of matrices.</p></li>
+<li><p>In <a class="reference internal" href="L2_QR_factorisation.html"><span class="doc">QR factorisation</span></a>, in Householder triangularisation,
+the submatrix <span class="math notranslate nohighlight">\(F\)</span> is <span class="math notranslate nohighlight">\((m-k+1)\times(m-k+1)\)</span>, rather than
+<span class="math notranslate nohighlight">\((n-k+1)\times(n-k+1)\)</span>.</p></li>
+<li><p>In <a class="reference internal" href="L2_QR_factorisation.html"><span class="doc">QR factorisation</span></a>, the stable sign choice in the
+Householder algorithm makes the target <span class="math notranslate nohighlight">\(Fx=-\mbox{sign}(x_1)\|x\|e_1\)</span>
+furthest from <span class="math notranslate nohighlight">\(x\)</span> (so that computing <span class="math notranslate nohighlight">\(v\)</span> involves no cancellation),
+rather than making <span class="math notranslate nohighlight">\(v\)</span> furthest from <span class="math notranslate nohighlight">\(x\)</span>.</p></li>
 <li><p>In <a class="reference internal" href="L2_QR_factorisation.html"><span class="doc">QR factorisation</span></a>, the slice <span class="math notranslate nohighlight">\(A[0:3, 3:6]\)</span> is a
 <span class="math notranslate nohighlight">\(3\times 3\)</span> submatrix, rather than <span class="math notranslate nohighlight">\(4\times 4\)</span>.</p></li>
+<li><p>In <a class="reference internal" href="L2_QR_factorisation.html"><span class="doc">QR factorisation</span></a>, the hint on Numpy’s <code class="docutils literal notranslate"><span class="pre">inner</span></code> and
+<code class="docutils literal notranslate"><span class="pre">dot</span></code> has been corrected: <code class="docutils literal notranslate"><span class="pre">numpy.inner</span></code> sums over the last index
+of each array (not over all indices), and neither function takes the
+complex conjugate, so <span class="math notranslate nohighlight">\(x^*y\)</span> should be computed with <code class="docutils literal notranslate"><span class="pre">numpy.vdot</span></code>
+or <code class="docutils literal notranslate"><span class="pre">x.conj()</span> <span class="pre">&#64;</span> <span class="pre">y</span></code>.</p></li>
+<li><p>In <a class="reference internal" href="L2_QR_factorisation.html"><span class="doc">QR factorisation</span></a>, in the exercise on implicit
+multiplication, Householder is performed on the first <span class="math notranslate nohighlight">\(n\)</span> columns
+(not rows) of the extended array <span class="math notranslate nohighlight">\(\hat{A}\)</span>.</p></li>
+<li><p>In <a class="reference internal" href="L2_QR_factorisation.html"><span class="doc">QR factorisation</span></a>, the full <span class="math notranslate nohighlight">\(m\times m\)</span> matrix <span class="math notranslate nohighlight">\(Q\)</span> is
+obtained from <span class="math notranslate nohighlight">\(Qe_1,\ldots,Qe_m\)</span>, rather than <span class="math notranslate nohighlight">\(Qe_1,\ldots,Qe_n\)</span>
+(which give only <span class="math notranslate nohighlight">\(\hat{Q}\)</span>).</p></li>
+<li><p>In <a class="reference internal" href="L2_QR_factorisation.html"><span class="doc">QR factorisation</span></a>, in the least squares problem,
+<span class="math notranslate nohighlight">\(\hat{Q}\)</span> has orthonormal columns, and its column space equals that
+of <span class="math notranslate nohighlight">\(A\)</span> provided that <span class="math notranslate nohighlight">\(A\)</span> has full rank <span class="math notranslate nohighlight">\(n\)</span>, which is assumed.</p></li>
+<li><p>In <code class="docutils literal notranslate"><span class="pre">cla_utils/exercises2.py</span></code>, the docstring of <code class="docutils literal notranslate"><span class="pre">GS_modified_R</span></code>
+now refers to the upper (not lower) triangular formulation of
+modified Gram-Schmidt.</p></li>
+<li><p>In <code class="docutils literal notranslate"><span class="pre">cla_utils/exercises2.py</span></code>, the docstring of
+<code class="docutils literal notranslate"><span class="pre">GS_modified_get_R</span></code> now describes the modified Gram-Schmidt step:
+<span class="math notranslate nohighlight">\(R\)</span> normalises column <span class="math notranslate nohighlight">\(k\)</span> and makes the later columns orthogonal to
+it (rather than making column <span class="math notranslate nohighlight">\(k\)</span> orthogonal to the previous ones).</p></li>
+<li><p>In <code class="docutils literal notranslate"><span class="pre">test/test_exercises2.py</span></code>, <code class="docutils literal notranslate"><span class="pre">test_GS_modified_R</span></code> now also
+checks that <span class="math notranslate nohighlight">\(Q\)</span> has orthonormal columns and that <span class="math notranslate nohighlight">\(R\)</span> is upper
+triangular; previously a <code class="docutils literal notranslate"><span class="pre">GS_modified_get_R</span></code> returning the identity
+matrix would pass.</p></li>
+<li><p>In <code class="docutils literal notranslate"><span class="pre">cla_utils/exercises3.py</span></code>, the docstring of
+<code class="docutils literal notranslate"><span class="pre">householder_solve</span></code> describes the returned columns as solution
+vectors, rather than right-hand side vectors.</p></li>
 </ul>
 </section>
 <section id="chapter-4-analysing-algorithms">
@@ -133,6 +188,10 @@ iteration, the eigenvector estimate follows from the eigenvector
 expansion of <span class="math notranslate nohighlight">\(A^kv^0\)</span>, not from the Taylor series; the eigenvalue
 estimate then follows from the quadratic accuracy of the Rayleigh
 quotient.</p></li>
+<li><p>In <a class="reference internal" href="L5_eigenvalues.html"><span class="doc">Finding eigenvalues of matrices</span></a>, the exercise on power iteration referred
+to <code class="docutils literal notranslate"><span class="pre">A3</span></code> and <code class="docutils literal notranslate"><span class="pre">B3</span></code>; the functions are
+<code class="xref py py-func docutils literal notranslate"><span class="pre">cla_utils.exercises9.get_A3()</span></code> and
+<code class="xref py py-func docutils literal notranslate"><span class="pre">cla_utils.exercises9.get_B3()</span></code>.</p></li>
 <li><p>In <a class="reference internal" href="L5_eigenvalues.html"><span class="doc">Finding eigenvalues of matrices</span></a>, inverse iteration converges to the
 eigenvector for which <span class="math notranslate nohighlight">\(1/|\lambda-\mu|\)</span> is largest (not smallest),
 i.e. whose eigenvalue is closest to <span class="math notranslate nohighlight">\(\mu\)</span>.</p></li>
@@ -166,6 +225,14 @@ eigenvalue of <span class="math notranslate nohighlight">\(A\)</span> of smalles
 from <span class="math notranslate nohighlight">\(A^{(k)}\)</span> is <span class="math notranslate nohighlight">\(A^{(k)}_{mm}=(q_m^{(k)})^TAq_m^{(k)}\)</span>, and it is
 used as the shift <span class="math notranslate nohighlight">\(\mu^{(k+1)}\)</span> for the next iteration (rather than
 <span class="math notranslate nohighlight">\(\mu^{(k)}\)</span>).</p></li>
+<li><p>In <code class="docutils literal notranslate"><span class="pre">cla_utils/exercises8.py</span></code>, <code class="docutils literal notranslate"><span class="pre">hessenberg_ev</span></code> used
+<code class="docutils literal notranslate"><span class="pre">cla_utils.norm</span></code> without importing <code class="docutils literal notranslate"><span class="pre">cla_utils</span></code>, so it (and hence
+<code class="docutils literal notranslate"><span class="pre">ev</span></code> and its test) failed with a <code class="docutils literal notranslate"><span class="pre">NameError</span></code>; it now uses
+<code class="docutils literal notranslate"><span class="pre">numpy.linalg.norm</span></code>.</p></li>
+<li><p>In <code class="docutils literal notranslate"><span class="pre">cla_utils/exercises9.py</span></code>, the docstrings of <code class="docutils literal notranslate"><span class="pre">inverse_it</span></code> and
+<code class="docutils literal notranslate"><span class="pre">rq_it</span></code> have been corrected (<code class="docutils literal notranslate"><span class="pre">rq_it</span></code> had text copied from
+<code class="docutils literal notranslate"><span class="pre">inverse_it</span></code>, and its eigenvalue history has length <code class="docutils literal notranslate"><span class="pre">maxit</span></code>), and
+“factoration” is now “factorisation”.</p></li>
 </ul>
 </section>
 <section id="chapter-6-krylov-methods">
@@ -193,6 +260,10 @@ error is bounded by the condition number of <span class="math notranslate nohigh
 times the relative residual; if the condition number is large, a
 small residual can coexist with a large relative error (not a
 large condition number).</p></li>
+<li><p>In <code class="docutils literal notranslate"><span class="pre">cla_utils/exercises10.py</span></code>, <code class="docutils literal notranslate"><span class="pre">get_AA100</span></code>, <code class="docutils literal notranslate"><span class="pre">get_BB100</span></code> and
+<code class="docutils literal notranslate"><span class="pre">get_CC100</span></code> now load their data files from the <code class="docutils literal notranslate"><span class="pre">cla_utils</span></code>
+directory; previously they only worked when run from inside that
+directory.</p></li>
 </ul>
 </section>
 <section id="chapter-7-preconditioning-krylov-methods">
