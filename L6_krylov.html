@@ -174,9 +174,10 @@ solves <span class="math notranslate nohighlight">\(Ax=b\)</span>.</p>
     </div><div class="proof-content">
 <p><span class="math notranslate nohighlight">\((\ddagger)\)</span> The <code class="xref py py-func docutils literal notranslate"><span class="pre">cla_utils.exercises10.arnoldi()</span></code> function has
 been left unimplemented. It should implement the Arnoldi algorithm
-using Numpy array operations where possible, and return the <span class="math notranslate nohighlight">\(Q\)</span> and
-<span class="math notranslate nohighlight">\(H\)</span> matrices after the requested number of iterations is complete.
-What is the minimal number of Python for loops possible?</p>
+using NumPy array operations for inner products and vector updates,
+and return the <span class="math notranslate nohighlight">\(Q\)</span> and <span class="math notranslate nohighlight">\(H\)</span> matrices after the requested number of
+iterations is complete. Follow the modified Gram-Schmidt pseudocode
+above; two nested Python loops are appropriate.</p>
 <p>The test
 script <code class="docutils literal notranslate"><span class="pre">test_exercises10.py</span></code> in the <code class="docutils literal notranslate"><span class="pre">test</span></code> directory will test
 this function.</p>
@@ -314,7 +315,9 @@ the Krylov subspace is generated from <span class="math notranslate nohighlight"
     </div><div class="proof-content">
 <p><span class="math notranslate nohighlight">\((\ddagger)\)</span> The <code class="xref py py-func docutils literal notranslate"><span class="pre">cla_utils.exercises10.GMRES()</span></code> function has
 been left unimplemented. It should implement the basic GMRES
-algorithm above, using one loop over the iteration count. You can
+algorithm above, using one outer loop over the iteration count, with
+an inner loop for modified Gram-Schmidt orthogonalisation as in your
+Arnoldi implementation. You can
 paste code from your <code class="xref py py-func docutils literal notranslate"><span class="pre">cla_utils.exercises10.arnoldi()</span></code>
 implementation, and you should use your least squares code to solve
 the least squares problem.  The test script <code class="docutils literal notranslate"><span class="pre">test_exercises10.py</span></code>
