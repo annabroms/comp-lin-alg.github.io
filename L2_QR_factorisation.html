@@ -629,8 +629,13 @@ above, using only one loop over <span class="math notranslate nohighlight">\(k\)
 directory will test this function.</p>
 </div></div><div class="admonition hint">
 <p class="admonition-title">Hint</p>
-<p>The “slice” notation using colons “:” is more an more important
+<p>The “slice” notation using colons “:” is more and more important
 when we are doing operations on submatrices. For example,</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">A</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="mi">3</span><span class="p">,</span> <span class="mi">3</span><span class="p">:</span><span class="mi">6</span><span class="p">]</span> <span class="o">-=</span> <span class="n">B</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="mi">3</span><span class="p">,</span> <span class="mi">3</span><span class="p">:</span><span class="mi">6</span><span class="p">]</span>
+</pre></div>
+</div>
+<p>only updates the specified <span class="math notranslate nohighlight">\(3\times 3\)</span> submatrix of <span class="math notranslate nohighlight">\(A\)</span>, but does it
+using fast precompiled code.</p>
 </div>
 <div class="admonition hint">
 <p class="admonition-title">Hint</p>
